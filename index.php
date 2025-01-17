@@ -27,7 +27,7 @@
   </head>
   <body>
   
-  <div class="site-loader"></div>
+  <!--<div class="site-loader"></div>-->
   
   <div class="site-wrap">
 
@@ -58,10 +58,9 @@
                   <li class="has-children">
                     <a href="properties.html">Gradovi</a>
                     <ul class="dropdown arrow-top">
-                      <li><a href="properties.html">Beograd</a></li>
-                      <li><a href="properties.html">Kraljevo</a></li>
-                      <li><a href="properties.html">Niš</a></li>
-                      <li><a href="properties.html">Prijepolje</a></li>
+                      <?php
+                         include "Components/city-dropdown.php";
+                      ?>
                     </ul>
                   </li>
                   <li class="has-children">
@@ -169,11 +168,9 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                    <option value="">Beograd</option>
-                    <option value="">Kraljevo</option>
-                    <option value="">Prijepolje</option>
-                    <option value="">Niš</option>
-                    <option value="">Novi Sad</option>
+                  <?php
+                     include "Components/city-dropdown-options.php";
+                  ?>
                   </select>
                 </div>
               </div>
@@ -187,26 +184,18 @@
         <div class="row">
           <div class="col-md-12">
             <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
-              <!--<div class="mr-auto">
-                <a href="index.html" class="icon-view view-module active"><span class="icon-view_module"></span></a>
-                <a href="view-list.html" class="icon-view view-list"><span class="icon-view_list"></span></a>
-                
-              </div>-->
               <div class="ml-auto d-flex align-items-center">
                 <div>
                   <a href="#" class="view-list px-3 border-right active">Sva stovarišta</a>
-                  <a href="#" class="view-list px-3 border-right">Beograd</a>
-                  <a href="#" class="view-list px-3 border-right">Novi Sad</a>
-                  <a href="#" class="view-list px-3 border-right">Niš</a>
-                  <a href="#" class="view-list px-3 border-right">Prijepolje</a>
-                  <a href="#" class="view-list px-3">Kraljevo</a>
+                  <?php
+                     include "Components/city-dropdown-a-elements.php";
+                  ?>
                 </div>
 
-
-                <div class="select-wrap">
+                <div class="select-wrap" style="margin-left:10px;">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select class="form-control form-control-sm d-block rounded-0">
-                    <option value="">Sortiraj po nazivu stovarišta</option>
+                    <option value="">Sortiraj po nazivu</option>
                     <option value="">Rastuće</option>
                     <option value="">Opadajuće</option>
                   </select>
@@ -225,38 +214,7 @@
         <div class="row mb-5">
 
           <?php 
-               require_once "database.php";
-               $sql = "SELECT * FROM vw_getallobjects";
-               $result = $conn-> query($sql);
-            
-               if ($result-> num_rows > 0)
-               {
-                   while ($row = $result-> fetch_assoc())
-                   {
-                       echo "<div class="."col-lg-4".">".
-                                "<div class="."property-entry".">".
-                                    "<a href="."property-details.html"." class="."property-thumbnail".">".
-                                        "<img src=".$row["image_path"]." alt="."Image"." class="."img-fluid"." style="."width:100%; height:50%".">".
-                                    "</a>".
-                                    "<div class="."property-body".">".
-                                        "<h2 class="."property-title"."><a href="."property-details.html".">".$row["name"]."</a></h2>".
-                                        "<br><span class="."property-location"."><span class="."icon-room"."></span>".$row["address_city"]."</span>".
-                                        "<br><br><strong class="."d-block"." style="."color:green; font-size:15px;".">".$row["description"]."</strong>".
-                                        "<br><ul class="."property-specs-wrap".">".
-                                            "<li>".
-                                                "<span class="."property-specs".">Broj proizvoda</span>".
-                                                "<span class="."property-specs-number".">".$row["number_of_products"]."</span>".
-                                            "</li>".
-                                    "</div>". 
-                                "</div>".
-                            "</div>";
-                   }
-               }
-               else {
-                    echo "0 results";
-               }
-            
-               $conn-> close();
+               include "Components/list-of-objects.php";
             ?>
           </div>
         
@@ -305,20 +263,9 @@
                   <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                 </div>
-
-            
-
           </div>
           
         </div>
-        <!--<div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p>
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            </p>
-          </div>
-          
-        </div>-->
       </div>
     </footer>
 
