@@ -66,17 +66,9 @@
                   <li class="has-children">
                     <a href="buy.html">Proizvodi</a>
                     <ul class="dropdown arrow-top">
-                      <li><a href="buy.html">Dimnjaci</a></li>
-                      <li><a href="buy.html">Opeka</a></li>
-                      <li><a href="buy.html">Gvožđe</a></li>
-                      <li class="has-children">
-                        <a href="buy.html">Cement</a>
-                        <ul class="dropdown">
-                          <li><a href="buy.html">Titan</a></li>
-                          <li><a href="buy.html">Ceresit</a></li>
-                          <li><a href="buy.html">Moravacem</a></li>
-                        </ul>
-                      </li>
+                      <?php
+                        include "Components/product-type-dropdown.php";
+                      ?>
                     </ul>
                   </li>
                   <li><a href="about.html">Projekt Križan proizvodi</a></li>
@@ -157,9 +149,12 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                    <option value="">Blokovi</option>
+                    <!--<option value="">Blokovi</option>
                     <option value="">Dimnjaci</option>
-                    <option value="">Cement</option>
+                    <option value="">Cement</option>-->
+                    <?php
+                        include "Components/product-type-dropdown-option.php";
+                      ?>
                   </select>
                 </div>
               </div>
