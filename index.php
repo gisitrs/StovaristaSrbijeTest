@@ -188,10 +188,10 @@
 
                 <div class="select-wrap" style="margin-left:10px;">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select class="form-control form-control-sm d-block rounded-0">
-                    <option value="">Sortiraj po nazivu</option>
-                    <option value="">Rastuće</option>
-                    <option value="">Opadajuće</option>
+                  <select id="sortListId" class="form-control form-control-sm d-block rounded-0">
+                    <option value="0">Sortiraj po nazivu</option>
+                    <option value="1">Rastuće</option>
+                    <option value="2">Opadajuće</option>
                   </select>
                 </div>
               </div>
@@ -205,7 +205,7 @@
     <div class="site-section site-section-sm bg-light">
       <div class="container">
       
-        <div class="row mb-5">
+        <div id="objectlistid" class="row mb-5">
 
           <?php 
                include "Components/list-of-objects.php";

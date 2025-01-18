@@ -7,7 +7,7 @@
     {
         while ($row = $result-> fetch_assoc())
         {
-            echo "<div id=".$row["div_id"]." class="."col-lg-4".">".
+            echo "<div id=".$row["div_id"]." class="."col-lg-4"." data-position=".$row["name"].">".
                     "<div class="."property-entry".">".
                         "<a href="."property-details.html"." class="."property-thumbnail".">".
                             "<img src=".$row["image_path"]." alt="."Image"." class="."img-fluid"." style="."width:100%; height:50%".">".
