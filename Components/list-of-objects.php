@@ -23,6 +23,7 @@
                                "</li>".
                                "</ul>".
                                "<p id=".$row["project_list_id"].">".$row["list_of_products"]."</p>".
+                               "<p id=".$row["krizan_project_list_id"]."><b>".$row["list_of_krizan_products"]."</b></p>".
                             "</div>". 
                         "</div>".
                     "</div>";

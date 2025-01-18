@@ -12,17 +12,11 @@ function searchObjects(){
     var selectedKrizanProductValue = selectedKrizanProduct.value;
     var selectedKrizanProductText = selectedKrizanProduct.options[selectedKrizanProduct.selectedIndex].text;
 
-    /*alert('Selected city text ' + selectedCityText + ' City value ' + selectedCityValue +
-          ' ' + selectedProductTypeValue + ' ' + selectedProductTypeText +
-          ' ' + selectedKrizanProductValue + ' ' + selectedKrizanProductText
-    );*/
-
     $('*[id*=cityid]:visible').each(function(index, value) {
         $("#"+ value.id + "").hide();
     });
 
     var filterByCity = 'cityid';
-    var filterByProduct = 0;
     
     if(selectedCityValue != 0)
     {
@@ -32,21 +26,37 @@ function searchObjects(){
     $('*[id*='+ filterByCity + ']:hidden').each(function(index, value) {
         var valueIdText = value.id;
         var pId = valueIdText.split('cityid')[0];
+        var pkId = "krizan_" + pId;
         var valueP = $("#"+ pId + "").text();
+        var valuePK = $("#"+ pkId + "").text();
         var showDiv = 0;
 
         if (selectedProductTypeValue == 0)
         {
             showDiv = 1;
         }
-        else {
+        else 
+        {
             if (valueP.indexOf(selectedProductTypeText) >= 0)
             {
                 showDiv = 1;
             }
         }
-        
-        //alert(valueP.indexOf(selectedProductTypeText) + ' ' + selectedProductTypeText);
+
+        if (selectedKrizanProductValue == 0)
+        {
+            showDiv = 1;
+        }
+        else 
+        {
+            if (valuePK.indexOf(selectedKrizanProductText) >= 0)
+            {
+                showDiv = 1;
+            }
+            else {
+                showDiv = 0;
+            }
+        }
 
         if (showDiv == 1)
         {
