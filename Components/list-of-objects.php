@@ -21,6 +21,8 @@
                                    "<span class="."property-specs".">Broj proizvoda</span>".
                                    "<span class="."property-specs-number".">".$row["number_of_products"]."</span>".
                                "</li>".
+                               "</ul>".
+                               "<p id=".$row["project_list_id"].">".$row["list_of_products"]."</p>".
                             "</div>". 
                         "</div>".
                     "</div>";
