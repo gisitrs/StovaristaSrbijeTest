@@ -7,7 +7,7 @@
      {
         while ($row = $result-> fetch_assoc())
         {
-            echo "<option value=".$row["product_type_name"].">".$row["product_type_name"]."</option>";
+            echo "<option value=".$row["order_id"].">".$row["product_type_name"]."</option>";
         }
      }
      else {

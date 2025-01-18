@@ -138,9 +138,10 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="">Dimnjaci</option>
-                    <option value="">Klime</option>
-                    <option value="">Krovni prozori</option>
+                     <option value="0">Svi proizvodi</option>
+                     <?php
+                        include "Components/krizan-product-type-dropdown-option.php";
+                     ?>
                   </select>
                 </div>
               </div>
@@ -149,10 +150,8 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                    <!--<option value="">Blokovi</option>
-                    <option value="">Dimnjaci</option>
-                    <option value="">Cement</option>-->
-                    <?php
+                      <option value="0">Svi proizvodi</option>
+                      <?php
                         include "Components/product-type-dropdown-option.php";
                       ?>
                   </select>
@@ -163,14 +162,16 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                  <?php
-                     include "Components/city-dropdown-options.php";
-                  ?>
+                      <option value="0">Svi gradovi</option>
+                      <?php
+                         include "Components/city-dropdown-options.php";
+                      ?>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
-                <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
+                  <!--<input  class="btn btn-success text-white btn-block rounded-0" value="Search" onclick="searchObjects()">-->
+                  <button type="button" class="btn btn-success text-white btn-block rounded-0"  onclick="searchObjects()">Search</button>
               </div>
             </div>
           </form>
@@ -180,12 +181,10 @@
           <div class="col-md-12">
             <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
               <div class="ml-auto d-flex align-items-center">
-                <div>
-                  <a href="#" class="view-list px-3 border-right active">Sva stovarišta</a>
-                  <?php
-                     include "Components/city-dropdown-a-elements.php";
-                  ?>
-                </div>
+                <!--<div>
+                  <a href="#" class="view-list px-3 border-right active">Svi gradovi</a>
+                  
+                </div>-->
 
                 <div class="select-wrap" style="margin-left:10px;">
                   <span class="icon icon-arrow_drop_down"></span>
@@ -278,6 +277,7 @@
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/aos.js"></script>
+  <script src="js/custom.js"></script>
 
   <script src="js/main.js"></script>
     

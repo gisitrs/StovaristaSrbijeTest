@@ -4,4 +4,7 @@ https://gisitrs.github.io/StovaristaSrbijeTest/
 
 -- https://localhost/StovaristaSrbije
 
+-- SQL exported file prepare for import on cPanel
+
+- utf8mb4_0900_ai_ci replace with utf8mb4_unicode_ci
 

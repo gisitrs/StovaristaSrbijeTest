@@ -1,6 +1,6 @@
 <?php
      include "database.php";
-     $sql = "SELECT * FROM vw_getallcities";
+     $sql = "SELECT * FROM vw_projectkrizanproducts";
      $result = $conn-> query($sql);
                       
      if ($result-> num_rows > 0)
