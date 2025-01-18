@@ -7,7 +7,7 @@
      {
         while ($row = $result-> fetch_assoc())
         {
-            echo "<li><a href="."buy.html?producttype=".$row["product_type_name"]."".">".$row["product_type_name"]."</a></li>";
+            echo "<li><a href="."buy.php?producttype=".$row["product_type_name"]."".">".$row["product_type_name"]."</a></li>";
         }
      }
      else {

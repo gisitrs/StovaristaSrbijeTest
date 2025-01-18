@@ -57,33 +57,24 @@
                     <a href="index.php">Naslovna</a>
                   </li>
                   <li class="has-children">
-                    <a href="properties.html">Gradovi</a>
+                    <a href="properties.php?city=SviGradovi">Gradovi</a>
                     <ul class="dropdown arrow-top">
-                      <li><a href="properties.html">Beograd</a></li>
-                      <li><a href="properties.html">Kraljevo</a></li>
-                      <li><a href="properties.html">Niš</a></li>
-                      <li><a href="properties.html">Prijepolje</a></li>
+                      <?php
+                         include "Components/city-dropdown.php";
+                      ?>
                     </ul>
                   </li>
                   <li class="has-children">
-                    <a href="buy.html">Proizvodi</a>
+                    <a href="buy.php?producttype=SviProizvodi">Proizvodi</a>
                     <ul class="dropdown arrow-top">
-                      <li><a href="buy.html">Dimnjaci</a></li>
-                      <li><a href="buy.html">Opeka</a></li>
-                      <li><a href="buy.html">Gvožđe</a></li>
-                      <li class="has-children">
-                        <a href="buy.html">Cement</a>
-                        <ul class="dropdown">
-                          <li><a href="buy.html">Titan</a></li>
-                          <li><a href="buy.html">Ceresit</a></li>
-                          <li><a href="buy.html">Moravacem</a></li>
-                        </ul>
-                      </li>
+                      <?php
+                        include "Components/product-type-dropdown.php";
+                      ?>
                     </ul>
                   </li>
-                  <li><a href="about.html">Projekt Križan proizvodi</a></li>
-                  <li class="active"><a href="blog.html" >O nama</a></li>
-                  <li><a href="contact.html">Kontakt</a></li>
+                  <li><a href="about.php">Projekt Križan proizvodi</a></li>
+                  <li class="active"><a href="blog.php" >O nama</a></li>
+                  <li><a href="contact.php">Kontakt</a></li>
                 </ul>
               </nav>
             </div>

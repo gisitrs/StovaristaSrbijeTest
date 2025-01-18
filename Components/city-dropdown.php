@@ -7,12 +7,12 @@
      {
         while ($row = $result-> fetch_assoc())
         {
-            echo "<li><a href="."properties.html?city=".$row["name"]."".">".$row["name"]."</a></li>";
+            echo "<li><a href="."properties.php?city=".$row["name"]."".">".$row["name"]."</a></li>";
         }
      }
      else {
             echo "0 results";
-          }
+     }
                       
      $conn-> close();
 ?>

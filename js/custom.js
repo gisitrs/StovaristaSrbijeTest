@@ -62,7 +62,6 @@ function searchObjects(){
 }
 
 var sel = document.getElementById('sortListId');
-
 sel.addEventListener("change", sortObjects);
 
 function sortObjects(){
