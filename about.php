@@ -104,112 +104,112 @@
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product6.html">
+                          <a href="https://www.projektkrizan.rs/product6.html">
                               <img class="img-fluid" src="images/service-6.png" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Krovne folije</h4>
                           <p>Različiti tipovi krovnih, građevinskih i ostalih folija</p>
-                          <a class="fw-medium" href="product6.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product6.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product4.html">
+                          <a href="https://www.projektkrizan.rs/product4.html">
                               <img class="img-fluid" src="images/service-4.jpg" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">ALU i drvene merdevine</h4>
                           <p>Sve vrste i dimenzije molerskih merdevina i skela</p>
-                          <a class="fw-medium" href="product4.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product4.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product5.html">
+                          <a href="https://www.projektkrizan.rs/product5.html">
                               <img class="img-fluid" src="images/service-5.png" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Krovni prozori</h4>
                           <p>Ponuda krovnih prozora, svetlarnika, opšivki i tavanskih merdevina.</p>
-                          <a class="fw-medium" href="product5.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product5.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product1.html">
+                          <a href="https://www.projektkrizan.rs/product1.html">
                               <img class="img-fluid" src="images/service-1.jpg" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Erlus crep</h4>
                           <p>Crep vrhunskog kvaliteta uvezen iz Nemačke</p>
-                          <a class="fw-medium" href="product1.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product1.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product2.html">
+                          <a href="https://www.projektkrizan.rs/product2.html">
                               <img class="img-fluid" src="images/service-2.jpg" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Schiedel dimnjaci</h4>
                           <p>INOX i zidani dimnjaci renomiranog proizvođača iz Austrije.</p>
-                          <a class="fw-medium" href="product2.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product2.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product3.html">
+                          <a href="https://www.projektkrizan.rs/product3.html">
                               <img class="img-fluid" src="images/service-3.jpg" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Klima uređaji</h4>
                           <p>GREE i Bergen su sinonimi za inverter klime vrhunskog kvaliteta.</p>
-                          <a class="fw-medium" href="product3.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product3.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product8.html">
+                          <a href="https://www.projektkrizan.rs/product8.html">
                               <img class="img-fluid" src="images/service-8.png" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Krovni dodaci</h4>
                           <p>Kopče za krov, krovne šetalice, klupe za dimnjake...</p>
-                          <a class="fw-medium" href="product8.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product8.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
               <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
                   <div class="service-item">
                       <div class="overflow-hidden">
-                          <a href="product7.html">
+                          <a href="https://www.projektkrizan.rs/product7.html">
                               <img class="img-fluid" src="images/service-7.png" alt="">
                           </a>
                       </div>
                       <div class="p-4 text-center border border-5 border-light border-top-0">
                           <h4 class="mb-3">Kamena vuna</h4>
                           <p>Rockwool kamene vune i zvučne izolacije</p>
-                          <a class="fw-medium" href="product7.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
+                          <a class="fw-medium" href="https://www.projektkrizan.rs/product7.html">Pročitaj više<i class="fa fa-arrow-right ms-2"></i></a>
                       </div>
                   </div>
               </div>
