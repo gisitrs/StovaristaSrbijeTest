@@ -63,14 +63,14 @@
                       ?>
                     </ul>
                   </li>
-                  <li class="has-children">
+                  <!--<li class="has-children">
                     <a href="buy.php?producttype=SviProizvodi">Proizvodi</a>
                     <ul class="dropdown arrow-top">
-                      <?php
+                      <php
                         include "Components/product-type-dropdown.php";
                       ?>
                     </ul>
-                  </li>
+                  </li>-->
                   <li><a href="about.php">Projekt Križan proizvodi</a></li>
                   <li><a href="blog.php">O nama</a></li>
                   <li><a href="contact.php">Kontakt</a></li>
@@ -133,25 +133,33 @@
           <form class="form-search col-md-12" style="margin-top: -100px;">
             <div class="row  align-items-end">
               <div class="col-md-3">
-                <label for="list-types">Projekt Križan proizvodi</label>
-                <div class="select-wrap">
+                <label for="list-types">Sortiraj</label>
+                <!--<div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="list-types" id="list-types" class="form-control d-block rounded-0">
                      <option value="0">Svi proizvodi</option>
-                     <?php
+                     <php
                         include "Components/krizan-product-type-dropdown-option.php";
                      ?>
+                  </select>
+                </div>-->
+                <div class="select-wrap">
+                  <span class="icon icon-arrow_drop_down"></span>
+                  <select id="sortListId" class="form-control d-block rounded-0">
+                    <option value="0">Sortiraj po nazivu</option>
+                    <option value="1">Rastuće</option>
+                    <option value="2">Opadajuće</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
-                <label for="offer-types">Proizvodi</label>
+                <label for="offer-types">Kategorija</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                      <option value="0">Svi proizvodi</option>
+                      <option value="0">Sve kategorije</option>
                       <?php
-                        include "Components/product-type-dropdown-option.php";
+                        include "Components/category-type-dropdown-option.php";
                       ?>
                   </select>
                 </div>
@@ -199,15 +207,15 @@
           </form>
         </div>  
 
-        <div class="row">
+        <!--<div class="row">
           <div class="col-md-12">
-            <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
+            <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">-->
               <!--<div class="mr-auto">
                 <a href="index.html" class="icon-view view-module active"><span class="icon-view_module"></span></a>
                 <a href="view-list.html" class="icon-view view-list"><span class="icon-view_list"></span></a>
                 
               </div>-->
-              <div class="ml-auto d-flex align-items-center">
+              <!--<div class="ml-auto d-flex align-items-center">-->
                 <!--<div>
                   <a href="#" class="view-list px-3 border-right active">Sva stovarišta</a>
                   <a href="#" class="view-list px-3 border-right">Beograd</a>
@@ -218,7 +226,7 @@
                 </div>-->
 
 
-                <div class="select-wrap">
+                <!--<div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select id="sortListId" class="form-control form-control-sm d-block rounded-0">
                     <option value="0">Sortiraj po nazivu</option>
@@ -229,7 +237,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
        
       </div>
     </div>

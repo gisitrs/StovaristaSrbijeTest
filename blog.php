@@ -64,14 +64,14 @@
                       ?>
                     </ul>
                   </li>
-                  <li class="has-children">
+                  <!--<li class="has-children">
                     <a href="buy.php?producttype=SviProizvodi">Proizvodi</a>
                     <ul class="dropdown arrow-top">
-                      <?php
+                      <php
                         include "Components/product-type-dropdown.php";
                       ?>
                     </ul>
-                  </li>
+                  </li>-->
                   <li><a href="about.php">Projekt Križan proizvodi</a></li>
                   <li class="active"><a href="blog.php" >O nama</a></li>
                   <li><a href="contact.php">Kontakt</a></li>

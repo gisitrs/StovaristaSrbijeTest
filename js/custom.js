@@ -8,9 +8,9 @@ function searchObjects(){
     var selectedProductTypeValue = selectedProductType.value;
     var selectedProductTypeText = selectedProductType.options[selectedProductType.selectedIndex].text;
 
-    var selectedKrizanProduct = document.getElementById("list-types");
+    /*var selectedKrizanProduct = document.getElementById("list-types");
     var selectedKrizanProductValue = selectedKrizanProduct.value;
-    var selectedKrizanProductText = selectedKrizanProduct.options[selectedKrizanProduct.selectedIndex].text;
+    var selectedKrizanProductText = selectedKrizanProduct.options[selectedKrizanProduct.selectedIndex].text;*/
 
     $('*[id*=cityid]:visible').each(function(index, value) {
         $("#"+ value.id + "").hide();
@@ -43,7 +43,7 @@ function searchObjects(){
             }
         }
 
-        if (selectedKrizanProductValue != 0)
+        /*if (selectedKrizanProductValue != 0)
         {
             if (valuePK.indexOf(selectedKrizanProductText) >= 0)
             {
@@ -52,7 +52,7 @@ function searchObjects(){
             else {
                 showDiv = 0;
             }
-        }
+        }*/
 
         if (showDiv == 1)
         {
