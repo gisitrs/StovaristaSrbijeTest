@@ -14,14 +14,19 @@ if (!isset($_SESSION["user"])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
-    <link href="../images/LOGO.png" rel="icon">
+    <link href="../assets/images/2019/Logo1.png" rel="icon">
 
-    <title>Projekt Križan D.O.O.</title>
+    <title>Neca Prom D.O.O.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/bootstrapAdmin.min.css" rel="stylesheet">
-    <link href="../css/adminMain.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
   </head>
 
@@ -52,18 +57,17 @@ if (!isset($_SESSION["user"])) {
         <div class="row">
             <div class="col-12">
               <nav class="main-nav">
-
                     <a href="index.php" class="logo">
-                      <img src="../images/LOGO-Text.png" alt="" class="mainLogoImage">
+                      <img src="../assets/images/2019/Necaprom_transparent.png" alt="" class="mainLogoImage">
                     </a>
 
                     <ul class="nav">
-                      <li><a style="margin-left: -30px;" <?php echo "href="."index.php?userId=".$_GET['userId'] ?> class="active">Novo stovarište</a></li>
-                      <li><a style="margin-left: -30px;" <?php echo "href="."datatable.php?userId=".$_GET['userId'] ?> >Sva stovarišta</a></li>
-                      <li><a style="margin-left: -30px;" <?php echo "href="."archive.php?userId=".$_GET['userId'] ?> >Arhiva</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."index.php?userId=".$_GET['userId'] ?> class="active">Nova nekretnina</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."datatable.php?userId=".$_GET['userId'] ?> >Sve nekretnine</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."sold_properties_datatable.php?userId=".$_GET['userId'] ?> >Prodate nekretnine</a></li>
                       <li><a style="margin-left: -30px;" <?php echo "href="."form.php?userId=".$_GET['userId'] ?> >Dodaj fotografije</a></li>
                       <li><a style="margin-left: -30px;" href="#" onclick='adminToWebsite("Edit", "Ovom akcijom napuštate admin sesiju, da li ste sigurni?");'>Sajt</a></li>
-                      <li><a style="margin-left: -30px;" href="#" onclick='adminLogOut("Edit", "Da li želite da napustite Projekt Križan admin?");'>Odjavi se</a></li>
+                      <li><a style="margin-left: -30px;" href="#" onclick='adminLogOut("Edit", "Da li želite da napustite NecaProm admin?");'>Odjavi se</a></li>
                       <li><a href="contact.html" style="display:none"></a></li>
                     </ul>   
                     <a class='menu-trigger'>
@@ -85,7 +89,7 @@ if (!isset($_SESSION["user"])) {
   <div class="col-lg-12">
         <?php
         if (isset($_POST["createProperty"])) { 
-           /*$ref = $_POST["ref"];
+           $ref = $_POST["ref"];
            $proName = $_POST["fullname"];
            $proAlias = 'Test';
            $agentId = 1;
@@ -137,7 +141,7 @@ if (!isset($_SESSION["user"])) {
               echo "<div class='alert alert-success'>Nova nekretnina ".$proName." je uspešno kreirana</div>";
            } else {
               echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-           }*/
+           }
 			
         }
 
@@ -158,24 +162,23 @@ if (!isset($_SESSION["user"])) {
     <?php echo "<form id="."contact-form"." style="."width: 100%;"." action="."index.php?userId=".$_GET["userId"]." method="."post".">"  ?>
       <div class="row">
       <div class="section-heading text-center">
-          <h3>Kreiraj stovarište</h3>
+          <h3>Kreiraj nekretninu</h3>
       </div>
-          </br></br>
-          <p>Broj stovarišta</p>
+          <p>Broj nepokretnosti</p>
         <div class="col-lg-6">
             <div class="contact-content" style="margin-top: 0px;">
                
                   <div class="row">
                      <div class="col-lg-12">
                         <?php
-                          require_once "../database.php";
-                          $maxOrderNumber = "SELECT  MAX(order_number) AS MaxOrderNumber FROM object";
-                          $resultMaxId = mysqli_query($conn, $maxOrderNumber);
+                          require_once "database.php";
+                          $maxRefId = "SELECT  MAX(CAST(ref AS int)) AS MaxRefId FROM jos_osrs_properties";
+                          $resultMaxId = mysqli_query($conn, $maxRefId);
                           $resultMaxValue = mysqli_fetch_array($resultMaxId, MYSQLI_ASSOC);
-                          $newOrderNumber = $resultMaxValue["MaxOrderNumber"] + 1;
+                          $newRef = $resultMaxValue["MaxRefId"] + 1;
                            
                           echo "<fieldset>".
-                                    "<input readonly type="."name"." name="."ref"." autocomplete="."on"." required value=".$newOrderNumber.">".
+                                    "<input readonly type="."name"." name="."ref"." autocomplete="."on"." required value=".$newRef.">".
                                "</fieldset>"
                         ?>
                      </div>
@@ -278,12 +281,12 @@ if (!isset($_SESSION["user"])) {
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="../jquery/jquery.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/isotope.min.js"></script>
-  <script src="../js/owl-carousel.js"></script>
-  <script src="../js/custom-js/counter.js"></script> 
-  <script src="../js/custom-js/custom.js"></script>
-  <script src="../js/customAdmin.js"></script> 
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/js/isotope.min.js"></script>
+  <script src="../assets/js/owl-carousel.js"></script>
+  <script src="../assets/js/counter.js"></script>
+  <script src="../assets/js/custom.js"></script> 
+  <script src="customAdmin.js"></script> 
   </body>
 </html>

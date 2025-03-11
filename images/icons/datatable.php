@@ -13,17 +13,24 @@ if (!isset($_SESSION["user"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
-    <link href="../images/LOGO.png" rel="icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 
-    <title>Projekt Križan D.O.O.</title>
+    <!-- Favicon -->
+    <link href="../assets/images/2019/Logo1.png" rel="icon">
+
+    <title>Neca Prom D.O.O.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/bootstrapAdmin.min.css" rel="stylesheet">
-    <link href="../css/adminMain.css" rel="stylesheet">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
     <style type="text/css">
@@ -656,18 +663,17 @@ if (!isset($_SESSION["user"])) {
         <div class="row">
             <div class="col-12">
               <nav class="main-nav">
-
                     <a href="index.php" class="logo">
-                      <img src="../images/LOGO-Text.png" alt="" class="mainLogoImage">
+                        <img src="../assets/images/2019/Necaprom_transparent.png" alt="" class="mainLogoImage">
                     </a>
 
                     <ul class="nav">
-                      <li><a style="margin-left: -30px;" <?php echo "href="."index.php?userId=".$_GET['userId'] ?> >Novo stovarište</a></li>
-                      <li><a style="margin-left: -30px;" <?php echo "href="."datatable.php?userId=".$_GET['userId'] ?> class="active">Sva stovarišta</a></li>
-                      <li><a style="margin-left: -30px;" <?php echo "href="."archive.php?userId=".$_GET['userId'] ?> >Arhiva</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."index.php?userId=".$_GET['userId'] ?>>Nova nekretnina</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."datatable.php?userId=".$_GET['userId'] ?> class="active">Sve nekretnine</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."sold_properties_datatable.php?userId=".$_GET['userId'] ?> >Prodate nekretnine</a></li>
                       <li><a style="margin-left: -30px;" <?php echo "href="."form.php?userId=".$_GET['userId'] ?> >Dodaj fotografije</a></li>
                       <li><a style="margin-left: -30px;" href="#" onclick='adminToWebsite("Edit", "Ovom akcijom napuštate admin sesiju, da li ste sigurni?");'>Sajt</a></li>
-                      <li><a style="margin-left: -30px;" href="#" onclick='adminLogOut("Edit", "Da li želite da napustite Projekt Križan admin?");'>Odjavi se</a></li>
+                      <li><a style="margin-left: -30px;" href="#" onclick='adminLogOut("Edit", "Da li želite da napustite NecaProm admin?");'>Odjavi se</a></li>
                       <li><a href="contact.html" style="display:none"></a></li>
                     </ul>   
                     <a class='menu-trigger'>
@@ -689,7 +695,7 @@ if (!isset($_SESSION["user"])) {
  <!--<div  style="position:absolute; top: 0; right:0;">
         <a href="logout.php" class="btn btn-warning" >Logout</a>
     </div>-->
-    <!--<div class="container col-lg-12">
+    <div class="container col-lg-12">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="text-center">
@@ -697,15 +703,15 @@ if (!isset($_SESSION["user"])) {
                 </div>
                 <div style="height: 50px;"></div>
                 <div class="row">
-                    <div class="col-sm-4">-->
+                    <div class="col-sm-4">
                         <!--<button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i>Dodaj novu</button>-->
-                    <!--</div>
+                    </div>
                 </div>
                 <div class="row col-lg-12">
                     <div class="col-lg-3">
                         <fieldset>
                             <select id="typeSelectId" name="testDT" class="form-select" style="margin-bottom:10px;">
-                                <php 
+                                <?php 
                                     require_once "database.php";
                                     $sql = "SELECT id, type_name FROM vw_getallpropertytypes ORDER BY id";
                                     $result = mysqli_query($conn, $sql);
@@ -738,7 +744,7 @@ if (!isset($_SESSION["user"])) {
                     </tr>
                 </thead>
                 <tbody>
-               <php 
+               <?php 
                   //include"dbcon.php"; 
                   require_once "database.php";
                   $query_pag_data = "SELECT * FROM vw_getallrepinformationsforedit ORDER BY ref DESC";
@@ -757,73 +763,73 @@ if (!isset($_SESSION["user"])) {
                       $landArea=$row['land_area'];
                       $isFeatured=$row['isFeatured'];
                 ?>
-                    <tr <php echo "id=".$property_id."_".$proType."_" ?> style="width:90%;">
+                    <tr <?php echo "id=".$property_id."_".$proType."_" ?> style="width:90%;">
                         <td id="tdId1" data-cell="ID">
-                           <p style="display: inline-block;" <php echo "id=".$property_id."_pId" ?>><php echo $property_id; ?></p>
+                           <p style="display: inline-block;" <?php echo "id=".$property_id."_pId" ?>><?php echo $property_id; ?></p>
                         </td>
                         <td id="tdId2" data-cell="Informacije o nepokretnosti">
                             <div id="PropertyNameHeaderId">
-                                <h4 <php echo "id=".$property_id."_pName" ?>><php echo $property_name; ?></h4>
+                                <h4 <?php echo "id=".$property_id."_pName" ?>><?php echo $property_name; ?></h4>
                             </div>
                             <div>
                                 <div>
                                     <p style="display: inline-block; margin-top:10px;"><b>Istaknuto:</b></p>
-                                    <input <php echo "id=".$property_id."_pIsFeatured" ?> type="checkbox" style="display: inline-block; margin-top:10px; margin-left:10px;" <php echo "value=".$isFeatured."" ?> disabled <php echo ($isFeatured == 1 ? 'checked' : '');?>></input>
+                                    <input <?php echo "id=".$property_id."_pIsFeatured" ?> type="checkbox" style="display: inline-block; margin-top:10px; margin-left:10px;" <?php echo "value=".$isFeatured."" ?> disabled <?php echo ($isFeatured == 1 ? 'checked' : '');?>></input>
                                 </div>
                                 <div>
                                     <p style="display: inline-block; margin-top:10px;"><b>Broj nepokretnosti:</b></p>
-                                    <p <php echo "id=".$property_id."_pRef" ?> style="display: inline-block; margin-top:10px;"><php echo $property_ref; ?></p>
+                                    <p <?php echo "id=".$property_id."_pRef" ?> style="display: inline-block; margin-top:10px;"><?php echo $property_ref; ?></p>
                                 </div>
                                 <div>
                                     <p style="display: inline-block;"><b>Kvadratura (m<sup>2</sup>):</b></p>
-                                    <p <php echo "id=".$property_id."_pSquareFeet" ?> style="display: inline-block;"><php echo $squareFeet; ?></p>
+                                    <p <?php echo "id=".$property_id."_pSquareFeet" ?> style="display: inline-block;"><?php echo $squareFeet; ?></p>
                                 </div>
                                 <div>
                                     <p style="display: inline-block;"><b>Površina placa (ar):</b></p>
-                                    <p <php echo "id=".$property_id."_pLandArea" ?> style="display: inline-block;"><php echo $landArea; ?></p>
+                                    <p <?php echo "id=".$property_id."_pLandArea" ?> style="display: inline-block;"><?php echo $landArea; ?></p>
                                 </div>
                                 <div>
                                     <p style="display: inline-block;"><b>Cena (€):</b></p>
-                                    <p <php echo "id=".$property_id."_pPrice" ?> style="display: inline-block;"><php echo $property_price; ?></p>
+                                    <p <?php echo "id=".$property_id."_pPrice" ?> style="display: inline-block;"><?php echo $property_price; ?></p>
                                 </div>
                                 <div>
                                     <p style="display: inline-block;"><b>Adresa:</b></p>
-                                    <p <php echo "id=".$property_id."_pAddress" ?> style="display: inline-block;"><php echo $property_address; ?></p>
+                                    <p <?php echo "id=".$property_id."_pAddress" ?> style="display: inline-block;"><?php echo $property_address; ?></p>
                                 </div>
                                 <div>
                                     <p style="display: inline-block;"><b>Tip:</b></p>
-                                    <p <php echo "id=".$property_id."_pType" ?> style="display: inline-block;"><php echo $typeName; ?></p>
+                                    <p <?php echo "id=".$property_id."_pType" ?> style="display: inline-block;"><?php echo $typeName; ?></p>
                                 </div>
                             </div>
                         </td>
                         <td id="tdId3" data-cell="Opis / Beleška">
                             <div Id="DivDescriptionId">
                                 <p><b>Opis:</b></p>
-                                <p <php echo "id=".$property_id."_pSmalldesc" ?> style="display: inline-block;"><php echo $smalldesc; ?></p>
+                                <p <?php echo "id=".$property_id."_pSmalldesc" ?> style="display: inline-block;"><?php echo $smalldesc; ?></p>
                             </div>
                             <div>
                                 <p style="margin-top:10px; "><b>Beleška agent:</b></p>
-                                <p <php echo "id=".$property_id."_pMetadesc" ?> ><php echo $metadesc; ?></p>
+                                <p <?php echo "id=".$property_id."_pMetadesc" ?> ><?php echo $metadesc; ?></p>
                             </div>
                         </td>
                         <td id="tdId4" data-cell="Akcije">
                             <div class="parent">
                                 <div class="child">
-                                    <div class="add" title="Sačuvaj izmene" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-check"></i></div>
+                                    <div class="add" title="Sačuvaj izmene" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-check"></i></div>
                                 </div>
-                                <div class="close child" title="Napusti izmene" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-close"></i></div>
-                                <div class="edit child" title="Izmeni oglas" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
-                                <div class="delete child" title="Ukloni oglas" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
-                                <div class="deleteimages child" title="Brisanje fotografija" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/remove-image.svg" style="width:30px;"></img></div>
-                                <div class="archive child" title="Arhiviraj oglas" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/archive.png" style="width:30px;"></img></div>
-                            </div> -->
+                                <div class="close child" title="Napusti izmene" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-close"></i></div>
+                                <div class="edit child" title="Izmeni oglas" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
+                                <div class="delete child" title="Ukloni oglas" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
+                                <div class="deleteimages child" title="Brisanje fotografija" data-toggle="tooltip" id="<?php echo $property_id; ?>"><img src="../assets/images/2019/remove-image.svg" style="width:30px;"></img></div>
+                                <div class="archive child" title="Arhiviraj oglas" data-toggle="tooltip" id="<?php echo $property_id; ?>"><img src="../assets/images/2019/archive.png" style="width:30px;"></img></div>
+                            </div>
                             <!--<div class="edit" title="Edit" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
                             <div class="delete" title="Delete" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
                             <div class="deleteimages" title="Delete Image" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/remove-image.svg" style="width:30px;"></img></div>
                             <div class="archive" title="Arhiviraj nepokretnost" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/archive.png" style="width:30px;"></img></div>-->
-                        <!--</td>
+                        </td>
                     </tr>   
-          <php } ?>     
+          <?php } ?>     
                 </tbody>
             </table>
         </div>
@@ -868,7 +874,7 @@ if (!isset($_SESSION["user"])) {
                         <input type="text" name="user_id" id="soldprice_id" style="width:200px; display: inline-block; margin-left: 10px;">
                         <br/><br/>
                     <p style="display: inline-block; margin-left: 10px; margin-right: 38px;">Datum prodaje</p>
-                        <input type="date" name="date_id" id="solddate_id" value="<php echo date('Y-m-d'); ?>" style="width:200px; display: inline-block; margin-left: 10px;">
+                        <input type="date" name="date_id" id="solddate_id" value="<?php echo date('Y-m-d'); ?>" style="width:200px; display: inline-block; margin-left: 10px;">
                         <br/><br/>
                     <p style="display: inline-block; margin-left: 10px; margin-right: 38px;">Beleška agent</p>
                         <textarea type="text" name="updaterec" id="archivetxtmetadesc" style="width:200px; min-height:150px; display: inline-block; margin-left: 17px;">
@@ -903,18 +909,18 @@ if (!isset($_SESSION["user"])) {
                 </form>
             </div>
         </div>
-    </div>-->
+    </div>
 
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="../jquery/jquery.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/isotope.min.js"></script>
-  <script src="../js/owl-carousel.js"></script>
-  <script src="../js/custom-js/counter.js"></script> 
-  <script src="../js/custom-js/custom.js"></script>
-  <script src="../js/customAdmin.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/js/isotope.min.js"></script>
+  <script src="../assets/js/owl-carousel.js"></script>
+  <script src="../assets/js/counter.js"></script>
+  <script src="../assets/js/custom.js"></script> 
+  <script src="customAdmin.js"></script> 
   <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
 
   </body>

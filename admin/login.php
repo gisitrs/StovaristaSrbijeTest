@@ -14,9 +14,9 @@ if (isset($_SESSION["user"])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
-    <link href="../images/Logo.png" rel="icon">
+    <link href="../images/LOGO.png" rel="icon">
 
-    <title>Neca Prom D.O.O.</title>
+    <title>Projekt Križan D.O.O.</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@ if (isset($_SESSION["user"])) {
                     <!-- ***** Logo Start ***** -->
                   <div style="text-align:center; margin-top:30px;">
                     <a href="" class="logo">
-                        <img src="../images/Logo.png" style="width:100px;" alt="" class="mainLogoImage">
+                        <img src="../images/LOGO.png" style="width:100px;" alt="" class="mainLogoImage">
                     </a>
                     <h1 style="text-align:center; color: #208d92">Projekt Križan D.O.O.</h1>
                   </div>

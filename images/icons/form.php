@@ -14,14 +14,19 @@ if (!isset($_SESSION["user"])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
-    <link href="../images/LOGO.png" rel="icon">
+    <link href="../assets/images/2019/Logo1.png" rel="icon">
 
-    <title>Projekt Križan D.O.O.</title>
+    <title>Neca Prom D.O.O.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/bootstrapAdmin.min.css" rel="stylesheet">
-    <link href="../css/adminMain.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
   </head>
 
@@ -45,20 +50,18 @@ if (!isset($_SESSION["user"])) {
         <div class="row">
             <div class="col-12">
               <nav class="main-nav">
-
                     <a href="index.php" class="logo">
-                      <img src="../images/LOGO-Text.png" alt="" class="mainLogoImage">
+                    <img src="../assets/images/2019/Necaprom_transparent.png" alt="" class="mainLogoImage">
                     </a>
-
                     <ul class="nav">
-                      <li><a style="margin-left: -30px;" <?php echo "href="."index.php?userId=".$_GET['userId'] ?> >Novo stovarište</a></li>
-                      <li><a style="margin-left: -30px;" <?php echo "href="."datatable.php?userId=".$_GET['userId'] ?> >Sva stovarišta</a></li>
-                      <li><a style="margin-left: -30px;" <?php echo "href="."archive.php?userId=".$_GET['userId'] ?> >Arhiva</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."index.php?userId=".$_GET['userId'] ?> >Nova nekretnina</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."datatable.php?userId=".$_GET['userId'] ?> >Sve nekretnine</a></li>
+                      <li><a style="margin-left: -30px;" <?php echo "href="."sold_properties_datatable.php?userId=".$_GET['userId'] ?> >Prodate nekretnine</a></li>
                       <li><a style="margin-left: -30px;" <?php echo "href="."form.php?userId=".$_GET['userId'] ?> class="active">Dodaj fotografije</a></li>
                       <li><a style="margin-left: -30px;" href="#" onclick='adminToWebsite("Edit", "Ovom akcijom napuštate admin sesiju, da li ste sigurni?");'>Sajt</a></li>
-                      <li><a style="margin-left: -30px;" href="#" onclick='adminLogOut("Edit", "Da li želite da napustite Projekt Križan admin?");'>Odjavi se</a></li>
+                      <li><a style="margin-left: -30px;" href="#" onclick='adminLogOut("Edit", "Da li želite da napustite NecaProm admin?");'>Odjavi se</a></li>
                       <li><a href="contact.html" style="display:none"></a></li>
-                    </ul>   
+                    </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -75,7 +78,7 @@ if (!isset($_SESSION["user"])) {
     </div>
  </div>
 
- <!--<php
+ <?php
         if (isset($_POST["submit"])) {
 
             require_once "database.php";
@@ -238,11 +241,11 @@ if (!isset($_SESSION["user"])) {
                 <div class="text-center">
                     <h3>Dodaj fotografije</h3>
                 </div>
-                    <form <php echo "href="."action.php?userId=".$_GET['userId'] ?> enctype="multipart/form-data" method="POST">
+                    <form <?php echo "href="."action.php?userId=".$_GET['userId'] ?> enctype="multipart/form-data" method="POST">
                         <div class="col-lg-12 bg-light mt-4 px-4 p-2 rounded justify-content-center">
                             <p style="font-size: 16px;">Izaberi nekretninu</p>
                             <select name="property" class="form-select">
-                              <php 
+                              <?php 
                                   require_once "database.php";
                                   $sql = "SELECT id, pro_name, CAST(ref AS int) AS ref FROM jos_osrs_properties WHERE isSold = 0 ORDER BY ref DESC";
                                   $result = mysqli_query($conn, $sql);
@@ -272,16 +275,16 @@ if (!isset($_SESSION["user"])) {
                     <div class="row p-2" id="images_preview">
                     </div>
                 </div>
-            </div>-->
+            </div>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="../jquery/jquery.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/isotope.min.js"></script>
-  <script src="../js/owl-carousel.js"></script>
-  <script src="../js/custom-js/counter.js"></script> 
-  <script src="../js/custom-js/custom.js"></script>
-  <script src="../js/customAdmin.js"></script> 
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/js/isotope.min.js"></script>
+  <script src="../assets/js/owl-carousel.js"></script>
+  <script src="../assets/js/counter.js"></script>
+  <script src="../assets/js/custom.js"></script> 
+  <script src="customAdmin.js"></script> 
   </body>
 </html>
