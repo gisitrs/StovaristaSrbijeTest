@@ -85,60 +85,48 @@ if (!isset($_SESSION["user"])) {
   <div class="col-lg-12">
         <?php
         if (isset($_POST["createProperty"])) { 
-           /*$ref = $_POST["ref"];
-           $proName = $_POST["fullname"];
-           $proAlias = 'Test';
-           $agentId = 1;
-           $companyId = 0;
+          function generate_uuid_v4() {
+            return sprintf(
+                '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+                mt_rand(0, 0xffff),
+                mt_rand(0, 0x0fff) | 0x4000,  // Version 4
+                mt_rand(0, 0x3fff) | 0x8000,  // Variant 1
+                mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+            );
+           }
+        
+           $id = generate_uuid_v4();
 
-           $price = $_POST["price"];
+           $ref = $_POST["ref"];
+           $proName = $_POST["fullname"];
            $proSmallDesc = $_POST["description"];
-           $proType =  $_POST["propertyTypes"];
-           $soldOn = '2024-11-30';
+
+           $lat = $_POST["lat"];
+           $lon = $_POST["lon"];
+           
+           $proCategory =  $_POST["propertyCategories"];
+           $proCity =  $_POST["propertyCities"];
 
            $address = $_POST["address"];
-           $squarefeet = $_POST["squarefeet"];
-           $landarea = $_POST["landarea"];
-           $metaDesc = $_POST["description1"];
-           $created = '2024-11-30';
-           $createdBy = $_GET["userId"];
-           $removeDate = '2024-11-30';
-           $isfeatured = $_POST["isfeatured"];
+           $isstared = $_POST["isfeatured"];
+           $hasdetails = $_POST["hasdetails"];
 
-           $proPdfFile = '';
-           $energy = '0.00';
-           $climate = '0.00';
-           $rentTime = '';
-
-           //$squareFeet = '0.00';
-           $lotSize = '0.00';
-           $cclass = '';
-           $eclass = '';
-
-           if ($landarea == ""){
-              $landarea = 0.0;
-           }
-
-           if ($squarefeet == ""){
-              $squarefeet = 0.0;
-           }
-           
-           require_once "database.php";
+           require_once "../database.php";
 		   
-           $maxId = "SELECT  MAX(Id) AS MaxId FROM jos_osrs_properties";
+           /*$maxId = "SELECT  MAX(Id) AS MaxId FROM jos_osrs_properties";
            $resultMaxId = mysqli_query($conn, $maxId);
            $resultMaxValue = mysqli_fetch_array($resultMaxId, MYSQLI_ASSOC);
-           $newId = $resultMaxValue["MaxId"] + 1;
+           $newId = $resultMaxValue["MaxId"] + 1;*/
 
-           $sql = "INSERT INTO jos_osrs_properties (id, ref, pro_name, pro_alias,agent_id, company_id, price, pro_small_desc, pro_type, soldOn, address, metadesc,created, created_by, remove_date, pro_pdf_file, energy,climate, rent_time, lot_size, c_class, e_class,square_feet,land_area, isFeatured) 
-           VALUES ('$newId', '$ref', '$proName', '$proAlias', '$agentId', '$companyId', '$price', '$proSmallDesc', '$proType', '$soldOn', '$address', '$metaDesc','$created', '$createdBy', '$removeDate', '$proPdfFile', '$energy','$climate', '$rentTime', '$lotSize', '$cclass', '$eclass','$squarefeet', '$landarea', '$isfeatured');";
+           $sql = "INSERT INTO object (id, order_number, name, description, city_Id, lat, lon, category_id, address, ordering, is_stared, has_details) 
+           VALUES ('$id', '$ref', '$proName', '$proSmallDesc', '$proCity', '$lat', '$lon', '$proCategory', '$address', '$ref', '$isstared', '$hasdetails');";
             
            if (mysqli_query($conn, $sql)) {
-              echo "<div class='alert alert-success'>Nova nekretnina ".$proName." je uspešno kreirana</div>";
+              echo "<div class='alert alert-success'>Novo stovarište ".$proName." je uspešno kreirano</div>";
            } else {
               echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-           }*/
-			
+           }
         }
 
         ?>
@@ -184,10 +172,23 @@ if (!isset($_SESSION["user"])) {
                            <input type="name" name="fullname" placeholder="Naziv:" autocomplete="on" required>
                         </fieldset>
                      </div>
-                     <div class="col-lg-12">
-                        <fieldset>
-                           <input type="number" min="0" name="price" placeholder="Cena (€):" autocomplete="on" required>
-                        </fieldset>
+                     <div class="col-lg-12" style="margin-bottom: 30px;">
+                         <fieldset>
+                             <select name="propertyCategories" class="form-select">
+                             <?php 
+                                 require_once "../database.php";
+                                 $sql = "SELECT id, name FROM vw_getallcategories";
+                                 $result = mysqli_query($conn, $sql);
+                           
+                                 while($rows = $result->fetch_assoc()){
+                                    $cityName = $rows['name'];
+                                    $cityId = $rows['id'];
+
+                                    echo "<option value='$cityId'>$cityName</option>";
+                                 };
+                             ?>
+                             </select>
+                         </fieldset>
                      </div>
                      <div class="col-lg-12">
                          <fieldset>
@@ -200,7 +201,7 @@ if (!isset($_SESSION["user"])) {
                           <input type="checkbox" id="isFeatured" name="isfeatured" style="margin-left:20px; width:30px; height:30px;" value="1">
                         </div>
                         <div style="display: inline-block;">
-                          <label for="isFeatured" style="margin-left: 15px; margin-bottom: 20px; margin-bottom: 20px;">Istakni</label>
+                          <label for="isFeatured" style="margin-left: 15px; margin-bottom: 20px; margin-bottom: 20px;">Zvezdica</label>
                         </div>
                      </div>
                  </div>
@@ -218,50 +219,40 @@ if (!isset($_SESSION["user"])) {
               </div>
               <div class="col-lg-12">
                   <fieldset>
-                     <!--<select name="propertyCategories" class="form-select">
-                        
-                           require_once "database.php";
-                           $sql = "SELECT id, category_name FROM jos_osrs_categories";
-                           $result = mysqli_query($conn, $sql);
-                           
-                           while($rows = $result->fetch_assoc()){
-                               $categoryName = $rows['category_name'];
-                               $categoryId = $rows['id'];
-
-                               echo "<option value='$categoryId'>$categoryName</option>";
-                           };
-                        
-                      </select>-->
-                      <input type="phone" name="squarefeet" placeholder="Kvadratura (m&sup2):" autocomplete="on">
+                      <input type="number" name="lat" step=".000001" placeholder="Lat:" autocomplete="on" required>
                   </fieldset>
               </div>
               <div class="col-lg-12">
                   <fieldset>
-                      <input type="phone" name="landarea" placeholder="Površina placa (ar):" autocomplete="on">
+                      <input type="number" name="lon" step=".000001" placeholder="Lon:" autocomplete="on">
                   </fieldset>
               </div>
-              <div class="col-lg-12">
+              <div class="col-lg-12" style="margin-bottom:30px;">
                   <fieldset>
-                     <select name="propertyTypes" class="form-select">
+                     <select name="propertyCities" class="form-select">
                         <?php 
-                           require_once "database.php";
-                           $sql = "SELECT id, type_name FROM jos_osrs_types WHERE id not in (8,9,10,11)";
+                           require_once "../database.php";
+                           $sql = "SELECT id, name FROM vw_getallcities";
                            $result = mysqli_query($conn, $sql);
                            
                            while($rows = $result->fetch_assoc()){
-                               $typeName = $rows['type_name'];
-                               $typeId = $rows['id'];
+                               $cityName = $rows['name'];
+                               $cityId = $rows['id'];
 
-                               echo "<option value='$typeId'>$typeName</option>";
+                               echo "<option value='$cityId'>$cityName</option>";
                            };
                         ?>
                       </select>
                   </fieldset>
               </div>
-              <div class="col-lg-12" style="margin-top:10px;">
-                  <fieldset>
-                     <textarea name="description1" placeholder="Beleška za agenta:" style="height: 100px;"></textarea>
-                  </fieldset>
+              <div class="col-lg-4">
+                  <div style="display: inline-block;">
+                      <input type="hidden" id="hasDetails" name="hasdetails" style="margin-left:20px; width:30px; height:30px;" value="0">
+                      <input type="checkbox" id="hasDetails" name="hasdetails" style="margin-left:20px; width:30px; height:30px;" value="1">
+                  </div>
+                  <div style="display: inline-block;">
+                      <label for="hasDetails" style="margin-left: 15px; margin-bottom: 20px; margin-bottom: 20px;">Ima detalje</label>
+                  </div>
               </div>
               <div class="col-lg-12" style="margin-top: 0px;">
                   <fieldset >
