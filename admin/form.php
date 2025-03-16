@@ -75,13 +75,32 @@ if (!isset($_SESSION["user"])) {
     </div>
  </div>
 
- <!--<php
+ <?php
         if (isset($_POST["submit"])) {
 
-            require_once "database.php";
+            function generate_uuid_v4() {
+                return sprintf(
+                    '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                    mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+                    mt_rand(0, 0xffff),
+                    mt_rand(0, 0x0fff) | 0x4000,  // Version 4
+                    mt_rand(0, 0x3fff) | 0x8000,  // Variant 1
+                    mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+                );
+               }
+
+            require_once "../database.php";
             
             $selectedPropertyId = $_POST["property"];
-            $dir = "../assets/images/properties/".$selectedPropertyId;
+
+            $sql = "SELECT order_number FROM object WHERE id='".$selectedPropertyId."'";
+            $result = mysqli_query($conn, $sql);
+
+            while($rows = $result->fetch_assoc()){
+                $refValue = $rows['order_number'];
+             };
+
+            $dir = "../images/".$refValue;
             $dirMedium = $dir."/medium";
             $dirOriginal = $dir."/original";
             $dirThumb = $dir."/thumb";
@@ -108,10 +127,11 @@ if (!isset($_SESSION["user"])) {
             }
 
             //$countimg = 1;
-            $maxOrderingId = "SELECT  MAX(ordering) AS MaxOrderingId FROM jos_osrs_photos WHERE pro_id=".$selectedPropertyId;
+            $maxOrderingId = "SELECT  MAX(ordering) AS MaxOrderingId FROM image WHERE id IN (SELECT image_id FROM object_image WHERE object_id='".$selectedPropertyId."')";
             $resultMaxOrderingId = mysqli_query($conn, $maxOrderingId);
             $resultMaxOrderingValue = mysqli_fetch_array($resultMaxOrderingId, MYSQLI_ASSOC);
             $countimg = $resultMaxOrderingValue["MaxOrderingId"] + 1;
+            //$countimg = 1;
 
             foreach($_FILES["images"]["name"] as $i=>$name)
             {
@@ -201,33 +221,24 @@ if (!isset($_SESSION["user"])) {
                 imagedestroy($image);
                 imagedestroy($new_image);
 
-                $sql = "INSERT INTO jos_osrs_photos (pro_id, image, ordering) VALUES (?,?,?)";
+                $newid = generate_uuid_v4();
+
+                $path = "images/".$refValue."/".$imagename;
+
+                $sql = "INSERT INTO image (id, name, path, ordering) VALUES (?,?,?,?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sss", $selectedPropertyId, $imagename, $countimg);
+                $stmt->bind_param("ssss", $newid, $imagename, $path, $countimg);
                 $stmt->execute();
 
                 $countimg = $countimg + 1;
+
+                $newobjectimageid = generate_uuid_v4();
+
+                $sql = "INSERT INTO object_image (id, object_id, image_id) VALUES (?,?,?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sss", $newobjectimageid, $selectedPropertyId, $newid);
+                $stmt->execute();
             }
-
-            /*$sql = "SELECT * FROM images ORDER BY sort";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = "<div class='col-lg-12 alert alert-success'>Sledeće fotografije su uspešno učitane!</div><div class='col-lg-12'>";
-
-            while($row = $result->fetch_assoc()){
-                $data .= '<div class="col-lg-4">
-                             <div class="card-group">
-                                 <div class="card mb-3">
-                                     <a href="'.$row['path'].'">
-                                        <img src="'.$row['path'].'" class="card-img-top" height="150">
-                                     </a>
-                                 </div>
-                              </div>
-                           </div>';
-            }
-
-            $data .= '</div>';*/
 
             echo "<div class='col-lg-12 alert alert-success'>Fotografije su uspešno učitane!</div>";
         }
@@ -238,19 +249,19 @@ if (!isset($_SESSION["user"])) {
                 <div class="text-center">
                     <h3>Dodaj fotografije</h3>
                 </div>
-                    <form <php echo "href="."action.php?userId=".$_GET['userId'] ?> enctype="multipart/form-data" method="POST">
+                    <form <?php echo "href="."action.php?userId=".$_GET['userId'] ?> enctype="multipart/form-data" method="POST">
                         <div class="col-lg-12 bg-light mt-4 px-4 p-2 rounded justify-content-center">
-                            <p style="font-size: 16px;">Izaberi nekretninu</p>
+                            <p style="font-size: 16px;">Izaberi stovarište</p>
                             <select name="property" class="form-select">
-                              <php 
-                                  require_once "database.php";
-                                  $sql = "SELECT id, pro_name, CAST(ref AS int) AS ref FROM jos_osrs_properties WHERE isSold = 0 ORDER BY ref DESC";
+                              <?php 
+                                  require_once "../database.php";
+                                  $sql = "SELECT id, name, order_number FROM object WHERE has_details = 1 ORDER BY order_number DESC";
                                   $result = mysqli_query($conn, $sql);
                            
                                    while($rows = $result->fetch_assoc()){
-                                      $propertyName = $rows['pro_name'];
+                                      $propertyName = $rows['name'];
                                       $propertyId = $rows['id'];
-                                      $refValue = $rows['ref'];
+                                      $refValue = $rows['order_number'];
                                       echo "<option value='$propertyId'>".$refValue.", ".$propertyName."</option>";
                                    };
                                ?>
@@ -258,7 +269,7 @@ if (!isset($_SESSION["user"])) {
                        
                             <p style="margin-top: 30px; font-size: 16px;">Izaberi fotografije</p>
                             <div class="form-control">
-                                <input class="form-control" type="file" name="images[]" multiple="multiple"/>
+                                <input class="form-control" type="file" name="images[]" multiple="multiple" style="margin-top:-7px;"/>
                             </div>
                             <div class="form-btn text-center">
                                 <input class="btn btn-primary btn-block mt-4" type="submit" name="submit" value="Upload" style="margin-top: 30px; margin-bottom: 30px; background-color: #36389b; border: none;"/>
@@ -272,7 +283,7 @@ if (!isset($_SESSION["user"])) {
                     <div class="row p-2" id="images_preview">
                     </div>
                 </div>
-            </div>-->
+            </div>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
