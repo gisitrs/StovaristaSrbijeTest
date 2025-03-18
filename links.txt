@@ -10,3 +10,11 @@ https://gisitrs.github.io/StovaristaSrbijeTest/
 
 - utf8mb4_0900_ai_ci replace with utf8mb4_unicode_ci
 
+-- Catch lat lon from google map
+
+https://developers.google.com/maps/documentation/javascript/examples/event-click-latlng
+
+https://stackoverflow.com/questions/15792655/add-marker-to-google-map-on-click
+
+
+

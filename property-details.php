@@ -117,7 +117,7 @@
                           }
                       }
                       else {
-                            echo "0 results";
+                            echo "<div><img src="."images/nophoto.png"." alt="."Image"." class="."img-fluid"."></div>";
                       }
                       
                       $conn-> close();
@@ -229,7 +229,7 @@
                           }
                       }
                       else {
-                            echo "0 results";
+                        echo "<div><img src="."images/nophoto.png"." alt="."Image"." class="."img-fluid"."></div>";
                       }
                       
                       $conn-> close();

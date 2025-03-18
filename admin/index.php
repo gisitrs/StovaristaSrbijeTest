@@ -12,7 +12,7 @@ if (!isset($_SESSION["user"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <!-- Favicon -->
     <link href="../images/LOGO.png" rel="icon">
 
@@ -22,7 +22,9 @@ if (!isset($_SESSION["user"])) {
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/bootstrapAdmin.min.css" rel="stylesheet">
     <link href="../css/adminMain.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   </head>
 
 <body>
@@ -204,30 +206,7 @@ if (!isset($_SESSION["user"])) {
                           <label for="isFeatured" style="margin-left: 15px; margin-bottom: 20px; margin-bottom: 20px;">Zvezdica</label>
                         </div>
                      </div>
-                 </div>
-               </form>
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="contact-content" style="margin-top: 0px;">
-            <div class="row">
-              <div class="col-lg-12">
-                 <fieldset>
-                    <input type="phone" name="address" placeholder="Adresa:" autocomplete="on" required>
-                 </fieldset>
-              </div>
-              <div class="col-lg-12">
-                  <fieldset>
-                      <input type="number" name="lat" step=".000001" placeholder="Lat:" autocomplete="on" required>
-                  </fieldset>
-              </div>
-              <div class="col-lg-12">
-                  <fieldset>
-                      <input type="number" name="lon" step=".000001" placeholder="Lon:" autocomplete="on">
-                  </fieldset>
-              </div>
-              <div class="col-lg-12" style="margin-bottom:30px;">
+                     <div class="col-lg-12" style="margin-bottom:30px;">
                   <fieldset>
                      <select name="propertyCities" class="form-select">
                         <?php 
@@ -254,6 +233,32 @@ if (!isset($_SESSION["user"])) {
                       <label for="hasDetails" style="margin-left: 15px; margin-bottom: 20px; margin-bottom: 20px;">Ima detalje</label>
                   </div>
               </div>
+                 </div>
+               </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="contact-content" style="margin-top: 0px;">
+            <div class="row">
+              <div class="col-lg-12">
+                 <fieldset>
+                    <input type="phone" name="address" placeholder="Adresa:" autocomplete="on" required>
+                 </fieldset>
+              </div>
+              <div class="col-lg-12">
+                  <fieldset>
+                      <input id="latId" type="number" name="lat" step=".000001" placeholder="Lat:" autocomplete="on" required>
+                  </fieldset>
+              </div>
+              <div class="col-lg-12">
+                  <fieldset>
+                      <input id="lonId" type="number" name="lon" step=".000001" placeholder="Lon:" autocomplete="on">
+                  </fieldset>
+              </div>
+              <div class="col-lg-12" style="margin-top: 0px;">
+                  <div id="map"></div>
+              </div>
               <div class="col-lg-12" style="margin-top: 0px;">
                   <fieldset >
                      <button type="submit" name="createProperty" class="orange-button">Kreiraj</button>
@@ -267,6 +272,40 @@ if (!isset($_SESSION["user"])) {
     </div>
   </div> 
 
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([44.808567, 20.467469], 8); // Coordinates for London, change to your desired location
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a marker at the given coordinates
+    //var marker = L.marker([51.505, -0.09]).addTo(map); // Coordinates for London
+
+    // Optional: Bind a popup to the marker
+    //marker.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
+
+    // Create a LayerGroup to store markers
+    var markersLayer = L.layerGroup().addTo(map);
+
+    // Event listener for map click to get Latitude and Longitude
+    map.on('click', function(event) {
+      var lat = event.latlng.lat;
+      var lng = event.latlng.lng;
+      // Display the coordinates
+      document.getElementById('latId').value = lat.toFixed(6);
+      document.getElementById('lonId').value = lng.toFixed(6);
+      
+      markersLayer.clearLayers();
+
+      var marker = L.marker([lat, lng]).addTo(markersLayer);
+    });
+  </script>
+
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="../jquery/jquery.min.js"></script>
@@ -275,6 +314,7 @@ if (!isset($_SESSION["user"])) {
   <script src="../js/owl-carousel.js"></script>
   <script src="../js/custom-js/counter.js"></script> 
   <script src="../js/custom-js/custom.js"></script>
-  <script src="../js/customAdmin.js"></script> 
+  <script src="../js/customAdmin.js"></script>
+  
   </body>
 </html>
