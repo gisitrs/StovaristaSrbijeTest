@@ -174,7 +174,7 @@
                           include "database.php";
                           
                           $selectedCity = $_GET["city"];
-                          $sql = "SELECT * FROM vw_getallcities";
+                          $sql = "SELECT * FROM vw_getallcitieswithobjects";
                           $result = $conn-> query($sql);
                       
                           if ($result-> num_rows > 0)
