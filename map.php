@@ -30,44 +30,63 @@
   
   
   <div class="site-wrap">
-    
+    <p id="objectvaluesId" style="display:block;"></p>
     <div id="map" style="position: absolute; left: 0; top: 4.9rem; bottom: 0; right: 0;"></div>
-
   </div>
-
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
   <script>
     // Initialize the map
-    var map = L.map('map').setView([44.808567, 20.467469], 7); // Coordinates for London, change to your desired location
+    var map = L.map('map').setView([44.244413, 20.986194], 7); // Coordinates for London, change to your desired location
 
     // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Add a marker at the given coordinates
-    //var marker = L.marker([51.505, -0.09]).addTo(map); // Coordinates for London
-
-    // Optional: Bind a popup to the marker
-    //marker.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
-
     // Create a LayerGroup to store markers
     var markersLayer = L.layerGroup().addTo(map);
 
-    // Event listener for map click to get Latitude and Longitude
-    map.on('click', function(event) {
-      var lat = event.latlng.lat;
-      var lng = event.latlng.lng;
-      // Display the coordinates
-      document.getElementById('latId').value = lat.toFixed(6);
-      document.getElementById('lonId').value = lng.toFixed(6);
-      
+    $.post("Components/getmapobjects.php", function(data) {
+         $("#objectvaluesId").val(data);
+    });
+
+    function createLocations(){
+      var listOfObjects = document.getElementById('objectvaluesId').value;
+
       markersLayer.clearLayers();
 
-      var marker = L.marker([lat, lng]).addTo(markersLayer);
-    });
+      // Step 1: Parse the string into an array of coordinate pairs
+      const coordinateString = listOfObjects
+          .replace(/\[/g, '')
+          .replace(/\]/g, '')
+          .split(',')
+          .map(Number);
+
+      // Step 2: Reformat the parsed data into an array of arrays (latitude, longitude)
+      const coordinates = [];
+      for (let i = 0; i < coordinateString.length; i += 2) {
+         coordinates.push([coordinateString[i], coordinateString[i + 1]]);
+      }
+
+      // Step 3: Use forEach to loop through the coordinates array
+      coordinates.forEach((coordinate, index) => {
+          const latitude = coordinate[0];
+          const longitude = coordinate[1];
+  
+          var marker = L.marker([latitude, longitude]).addTo(markersLayer);
+      });
+    }
+
+    window.onload = function() { 
+      createLocations();
+    };
+
   </script>
+
+  <script src="jquery/jquery.min.js"></script>
     
   </body>
 </html>
