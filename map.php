@@ -63,20 +63,32 @@
           .replace(/\[/g, '')
           .replace(/\]/g, '')
           .split(',')
-          .map(Number);
+          .map(String);
 
       // Step 2: Reformat the parsed data into an array of arrays (latitude, longitude)
       const coordinates = [];
-      for (let i = 0; i < coordinateString.length; i += 2) {
-         coordinates.push([coordinateString[i], coordinateString[i + 1]]);
+      for (let i = 0; i < coordinateString.length; i += 7) {
+         coordinates.push([coordinateString[i], coordinateString[i + 1], coordinateString[i + 2], coordinateString[i + 3], coordinateString[i + 4], coordinateString[i + 5], coordinateString[i + 6]]);
       }
 
       // Step 3: Use forEach to loop through the coordinates array
       coordinates.forEach((coordinate, index) => {
           const latitude = coordinate[0];
           const longitude = coordinate[1];
+          const name = coordinate[2];
+          const address = coordinate[3];
+          const imagePath = coordinate[4];
+          const orderNumber = coordinate[5];
+          const moreDetails = coordinate[6];
+          var showMoreDetails = 'block';
+
+          if (moreDetails == '#'){
+            showMoreDetails = 'none';
+          }
   
           var marker = L.marker([latitude, longitude]).addTo(markersLayer);
+          marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /><h2>'+ name +'</h2>'+ 
+                          '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>');
       });
     }
 
