@@ -11,14 +11,14 @@
 
      $conn->set_charset("utf8mb4");
 
-     $sql = "SELECT * FROM vw_getallmapobjects";
+     $sql = "SELECT * FROM vw_getcitylocations";
      $result = $conn-> query($sql);
                       
      if ($result-> num_rows > 0)
      {
         while ($row = $result-> fetch_assoc())
         {
-            echo $row["list_of_mapobjects"];
+            echo $row["list_of_citylocations"];
         }
      }
      else {

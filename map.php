@@ -57,7 +57,8 @@
           </div>
           <div class="col-lg-3" style="display:inline-block;">
               <fieldset>
-                  <select name="propertyCities" class="form-select">
+                  <select id="citySelectId" name="propertyCities" class="form-select" onchange="cityChanged()">
+                      <option value="0">Svi gradovi</option>
                       <?php 
                           require_once "database.php";
                           $sql = "SELECT id, name FROM vw_getallcitieswithobjects";
@@ -79,6 +80,7 @@
   
   <div class="site-wrap">
     <p id="objectvaluesId" style="display:block;"></p>
+    <p id="citylocationsId" style="display:block;"></p>
     <div id="map" style="position: absolute; left: 0; top: 4.9rem; bottom: 0; right: 0;"></div>
   </div>
   
@@ -101,11 +103,23 @@
          $("#objectvaluesId").val(data);
     });
 
+    $.post("Components/getcitylocations.php", function(data) {
+         $("#citylocationsId").val(data);
+    });
+
     function categoryChanged(){
       var selectElement = document.getElementById("categorySelectId");
       // Get the text of the selected option
       var selectedText = selectElement.options[selectElement.selectedIndex].text;
       createLocations(selectedText);
+    }
+
+    function cityChanged(){
+      var selectElement = document.getElementById("citySelectId");
+      // Get the text of the selected option
+      var selectedText = selectElement.options[selectElement.selectedIndex].text;
+      //alert(selectedText);
+      changeMapZoom(selectedText);
     }
 
     function createLocations(type){
@@ -143,11 +157,51 @@
           }
 
           if (type == 'Sve kategorije' || categoryName == type){
-            var marker = L.marker([latitude, longitude]).addTo(markersLayer);
-          marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /><h2>'+ name +'</h2>'+ 
-                          '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>' +
-                          '<h6 style="display:inline-block;">Tip: ' + categoryName + '</h6>' );
+              var marker = L.marker([latitude, longitude]).addTo(markersLayer);
+              marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /><h2>'+ name +'</h2>'+ 
+                              '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>' +
+                              '<h6 style="display:inline-block;">Tip: ' + categoryName + '</h6>' );
 
+          }
+      });
+    }
+
+    function changeMapZoom(city){
+      var listOfObjects = document.getElementById('citylocationsId').value;
+
+      // Step 1: Parse the string into an array of coordinate pairs
+      const coordinateString = listOfObjects
+         .replace(/\[/g, '')
+         .replace(/\]/g, '')
+         .split(',')
+         .map(String);
+
+      // Step 2: Reformat the parsed data into an array of arrays (latitude, longitude)
+      const coordinates = [];
+      for (let i = 0; i < coordinateString.length; i += 3) {
+          coordinates.push([coordinateString[i], coordinateString[i + 1], coordinateString[i + 2]]);
+      }
+
+      // Step 3: Use forEach to loop through the coordinates array
+      coordinates.forEach((coordinate, index) => {
+          const latitude = coordinate[0];
+          const longitude = coordinate[1];
+          const name = coordinate[2];
+
+          var newCenter = [];
+          var newZoom = 0; 
+
+          if (name == city){
+              newCenter = [latitude, longitude];
+              newZoom = 10; 
+          }
+          else if (city == 'Svi gradovi'){
+              newCenter = [44.244413, 20.986194];
+              newZoom = 7;  
+          }
+          
+          if (newZoom != 0){
+             map.setView(newCenter, newZoom);
           }
       });
     }
