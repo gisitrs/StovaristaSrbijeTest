@@ -20,13 +20,61 @@
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/fl-bigmug-line.css">
     
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrapAdmin.min.css" rel="stylesheet">
+    <link href="css/adminMain.css" rel="stylesheet">
   
     <link rel="stylesheet" href="css/aos.css">
-
-    <!--<link rel="stylesheet" href="css/style.css">-->
     
   </head>
   <body>
+
+  <div class="col-lg-12" style="position: absolute; left: 0; top: 0rem; bottom: 0; right: 0;">
+      <div class="col-lg-3" style="display:inline-block;">
+          <a href="index.php" class="logo">
+              <img src="images/LOGO-Text.png" alt="" class="mainLogoImage" style="margin-top:10px;">
+          </a>
+      </div>
+      <div  class="col-lg-6" style="margin-top:20px; display:inline-block;">
+          <div class="col-lg-3" style="display:inline-block;">
+              <fieldset>
+                  <select id="categorySelectId" name="propertyCategories" class="form-select" onchange="categoryChanged()">
+                      <option value="0">Sve kategorije</option>
+                      <?php 
+                          require_once "database.php";
+                          $sql = "SELECT id, name FROM vw_getallcategories";
+                          $result = mysqli_query($conn, $sql);
+                           
+                          while($rows = $result->fetch_assoc()){
+                              $cityName = $rows['name'];
+                              $cityId = $rows['id'];
+
+                              echo "<option value='$cityId'>$cityName</option>";
+                          };
+                      ?>
+                  </select>
+              </fieldset>
+          </div>
+          <div class="col-lg-3" style="display:inline-block;">
+              <fieldset>
+                  <select name="propertyCities" class="form-select">
+                      <?php 
+                          require_once "database.php";
+                          $sql = "SELECT id, name FROM vw_getallcitieswithobjects";
+                          $result = mysqli_query($conn, $sql);
+                           
+                          while($rows = $result->fetch_assoc()){
+                              $cityName = $rows['name'];
+                              $cityId = $rows['id'];
+
+                              echo "<option value='$cityId'>$cityName</option>";
+                          };
+                      ?>
+                  </select>
+              </fieldset>
+            </div>
+      </div>
+  </div>
   
   
   <div class="site-wrap">
@@ -53,7 +101,14 @@
          $("#objectvaluesId").val(data);
     });
 
-    function createLocations(){
+    function categoryChanged(){
+      var selectElement = document.getElementById("categorySelectId");
+      // Get the text of the selected option
+      var selectedText = selectElement.options[selectElement.selectedIndex].text;
+      createLocations(selectedText);
+    }
+
+    function createLocations(type){
       var listOfObjects = document.getElementById('objectvaluesId').value;
 
       markersLayer.clearLayers();
@@ -67,8 +122,8 @@
 
       // Step 2: Reformat the parsed data into an array of arrays (latitude, longitude)
       const coordinates = [];
-      for (let i = 0; i < coordinateString.length; i += 7) {
-         coordinates.push([coordinateString[i], coordinateString[i + 1], coordinateString[i + 2], coordinateString[i + 3], coordinateString[i + 4], coordinateString[i + 5], coordinateString[i + 6]]);
+      for (let i = 0; i < coordinateString.length; i += 8) {
+         coordinates.push([coordinateString[i], coordinateString[i + 1], coordinateString[i + 2], coordinateString[i + 3], coordinateString[i + 4], coordinateString[i + 5], coordinateString[i + 6], coordinateString[i + 7]]);
       }
 
       // Step 3: Use forEach to loop through the coordinates array
@@ -80,20 +135,25 @@
           const imagePath = coordinate[4];
           const orderNumber = coordinate[5];
           const moreDetails = coordinate[6];
+          const categoryName = coordinate[7];
           var showMoreDetails = 'block';
 
           if (moreDetails == '#'){
             showMoreDetails = 'none';
           }
-  
-          var marker = L.marker([latitude, longitude]).addTo(markersLayer);
+
+          if (type == 'Sve kategorije' || categoryName == type){
+            var marker = L.marker([latitude, longitude]).addTo(markersLayer);
           marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /><h2>'+ name +'</h2>'+ 
-                          '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>');
+                          '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>' +
+                          '<h6 style="display:inline-block;">Tip: ' + categoryName + '</h6>' );
+
+          }
       });
     }
 
     window.onload = function() { 
-      createLocations();
+      createLocations('Sve kategorije');
     };
 
   </script>
