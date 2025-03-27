@@ -77,8 +77,23 @@
 	// Menu Dropdown Toggle
 	if($('.menu-trigger').length){
 		$(".menu-trigger").on('click', function() {	
+			var topValue = $('#mainMap').css('top');
+			var splitValue = 0; 
+			
+			if (topValue != null)
+			{
+				splitValue = topValue.split('px')[0];
+			}
+
 			$(this).toggleClass('active');
 			$('.header-area .nav').slideToggle(200);
+
+			if(splitValue > 200){
+                $("#mainMap").css('top','3.9rem');
+			}
+			else{
+				$("#mainMap").css('top','15rem');
+			}
 		});
 	}
 

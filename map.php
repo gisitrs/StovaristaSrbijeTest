@@ -23,13 +23,71 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrapAdmin.min.css" rel="stylesheet">
     <link href="css/adminMain.css" rel="stylesheet">
-  
+    
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
     <link rel="stylesheet" href="css/aos.css">
     
   </head>
   <body>
 
-  <div class="col-lg-12" style="position: absolute; left: 0; top: 0rem; bottom: 0; right: 0;">
+  <header class="header-area header-sticky" style="height:3.9rem;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="height:3.9rem;">
+              <nav class="main-nav" style="margin-top:0px;">
+
+                    <a href="index.php" class="logo">
+                      <img src="images/LOGO-Text.png" alt="" class="mainLogoImage" style="margin-top:10px;">
+                    </a>
+
+                    <ul class="nav" style="margin-top:0px;">
+                      <li> <select id="categorySelectId" name="propertyCategories" class="form-select" onchange="categoryChanged()" style="margin-left: 35px; margin-top: 10px; width:250px;"> <!--margin-left: -300px;-->
+                              <option value="0">Sve kategorije</option>
+                                  <?php 
+                                      require_once "database.php";
+                                      $sql = "SELECT id, name FROM vw_getallcategories";
+                                      $result = mysqli_query($conn, $sql);
+                           
+                                      while($rows = $result->fetch_assoc()){
+                                          $cityName = $rows['name'];
+                                          $cityId = $rows['id'];
+
+                                          echo "<option value='$cityId'>$cityName</option>";
+                                      };
+                                  ?>
+                            </select>
+                      </li>
+                      <li> <select id="citySelectId" name="propertyCities" class="form-select" onchange="cityChanged()" style="margin-left: 35px; margin-top: 10px; width:250px;">
+                               <option value="0">Svi gradovi</option>
+                                   <?php 
+                                       require_once "database.php";
+                                       $sql = "SELECT id, name FROM vw_getallcitieswithobjects";
+                                       $result = mysqli_query($conn, $sql);
+                           
+                                       while($rows = $result->fetch_assoc()){
+                                           $cityName = $rows['name'];
+                                           $cityId = $rows['id'];
+
+                                           echo "<option value='$cityId'>$cityName</option>";
+                                       };
+                                    ?>
+                           </select>
+                      </li>
+                      <li><a style="margin-top:10px;" href="index.php">Naslovna strana</a></li>
+                      <li><a href="contact.html" style="display:none"></a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+
+  <!--<div class="col-lg-12" style="position: absolute; left: 0; top: 0rem; bottom: 0; right: 0;">
       <div class="col-lg-3" style="display:inline-block;">
           <a href="index.php" class="logo">
               <img src="images/LOGO-Text.png" alt="" class="mainLogoImage" style="margin-top:10px;">
@@ -40,7 +98,7 @@
               <fieldset>
                   <select id="categorySelectId" name="propertyCategories" class="form-select" onchange="categoryChanged()">
                       <option value="0">Sve kategorije</option>
-                      <?php 
+                      <php 
                           require_once "database.php";
                           $sql = "SELECT id, name FROM vw_getallcategories";
                           $result = mysqli_query($conn, $sql);
@@ -59,7 +117,7 @@
               <fieldset>
                   <select id="citySelectId" name="propertyCities" class="form-select" onchange="cityChanged()">
                       <option value="0">Svi gradovi</option>
-                      <?php 
+                      <php 
                           require_once "database.php";
                           $sql = "SELECT id, name FROM vw_getallcitieswithobjects";
                           $result = mysqli_query($conn, $sql);
@@ -75,13 +133,13 @@
               </fieldset>
             </div>
       </div>
-  </div>
+  </div>-->
   
   
   <div class="site-wrap">
     <p id="objectvaluesId" style="display:block;"></p>
     <p id="citylocationsId" style="display:block;"></p>
-    <div id="map" style="position: absolute; left: 0; top: 4.9rem; bottom: 0; right: 0;"></div>
+    <div id="mainMap" style="position: absolute; left: 0; top: 3.9rem; bottom: 0; right: 0;"></div>
   </div>
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -89,7 +147,7 @@
 
   <script>
     // Initialize the map
-    var map = L.map('map').setView([44.244413, 20.986194], 7); // Coordinates for London, change to your desired location
+    var map = L.map('mainMap').setView([44.244413, 20.986194], 7); // Coordinates for London, change to your desired location
 
     // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -213,6 +271,14 @@
   </script>
 
   <script src="jquery/jquery.min.js"></script>
+
+  <script src="jquery/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/isotope.min.js"></script>
+  <script src="js/owl-carousel.js"></script>
+  <script src="js/custom-js/counter.js"></script> 
+  <script src="js/custom-js/custom.js"></script>
+  <script src="js/customAdmin.js"></script>
     
   </body>
 </html>
