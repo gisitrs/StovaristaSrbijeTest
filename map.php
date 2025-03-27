@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -77,7 +77,7 @@
                       <li><a style="margin-top:10px;" href="index.php">Naslovna strana</a></li>
                       <li><a href="contact.html" style="display:none"></a></li>
                     </ul>   
-                    <a class='menu-trigger'>
+                    <a class='menu-trigger' style="margin-top: -10px;">
                         <span>Menu</span>
                     </a>
                     <!-- ***** Menu End ***** -->
@@ -143,7 +143,7 @@
   </div>
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
     // Initialize the map
@@ -169,7 +169,7 @@
       var selectElement = document.getElementById("categorySelectId");
       // Get the text of the selected option
       var selectedText = selectElement.options[selectElement.selectedIndex].text;
-      createLocations(selectedText);
+      createLocations(selectedText, 0);
     }
 
     function cityChanged(){
@@ -180,7 +180,7 @@
       changeMapZoom(selectedText);
     }
 
-    function createLocations(type){
+    function createLocations(type, id){
       var listOfObjects = document.getElementById('objectvaluesId').value;
 
       markersLayer.clearLayers();
@@ -214,7 +214,7 @@
             showMoreDetails = 'none';
           }
 
-          if (type == 'Sve kategorije' || categoryName == type){
+          if (type == 'Sve kategorije' || categoryName == type || id == orderNumber){
               var marker = L.marker([latitude, longitude]).addTo(markersLayer);
               marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /><h2>'+ name +'</h2>'+ 
                               '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>' +
@@ -265,7 +265,15 @@
     }
 
     window.onload = function() { 
-      createLocations('Sve kategorije');
+      const url_params = new URLSearchParams(window.location.search);
+      const objectId = url_params.get('id');
+      var type = 'Sve kategorije';
+
+      if (objectId != 0){
+        type = 'Nema kategorije';
+      }
+
+      setTimeout(function() { createLocations(type, objectId); }, 1000);
     };
 
   </script>

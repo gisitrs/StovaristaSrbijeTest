@@ -71,7 +71,7 @@
                       ?>
                     </ul>
                   </li>-->
-                  <li><a href="map.php">Mapa</a></li>
+                  <li><a href="map.php?id=0">Mapa</a></li>
                   <li><a href="about.php">Projekt Križan proizvodi</a></li>
                   <li><a href="blog.php">O nama</a></li>
                   <li><a href="contact.php">Kontakt</a></li>
@@ -186,7 +186,6 @@
                 </div>
               </div>
               <h2 class="h4 text-black">Više detalja</h2>
-              <p>
               <?php
                       include "database.php";
                           
@@ -198,7 +197,8 @@
                       {
                           while ($row = $result-> fetch_assoc())
                           {
-                              echo $row["large_description"];
+                              echo "<p>".$row["large_description"]."</p>".
+                                   "<p style="."display:inline-block;"."><a href="."map.php?id=".$row["order_number"]."><img src="."images/icons/pin.webp"." style="."margin-left:30px;width:40px;"."></a></p>";
                           }
                       }
                       else {
@@ -207,7 +207,6 @@
                       
                       $conn-> close();
                   ?>
-              </p>
 
               <div class="row no-gutters mt-5">
                 <div class="col-12">
@@ -329,7 +328,7 @@
                                         "<div style="."display:inline-block;margin-left:10px;".">".
                                             "<img src="."images/icons/Star.png"." style="."width:20px;display:".$row["star_visibility"].";"."></img>".
                                         "</div>".
-                                        "<br><span class="."property-location"."><span class="."icon-room"."></span>".$row["address_city"]."</span>".
+                                        "<br><a href="."map.php?id=".$row["order_number"]." class="."property-location"."><span class="."icon-room"."></span>".$row["address_city"]."</a>".
                                         "<br><br><strong class="."d-block"." style="."color:green; font-size:15px;".">".$row["description"]."</strong>".
                                         /*"<br><ul class="."property-specs-wrap".">".
                                         "<li>".
@@ -338,7 +337,8 @@
                                         "</li>".
                                         "</ul>".*/
                                        "<br/>".
-                                       "<p id=".$row["project_list_id"]."><b>Kategorija: </b>".$row["category_name"]."</p>".
+                                       "<p id=".$row["project_list_id"]." style="."display:inline-block;"."><b>Tip: </b>".$row["category_name"]."</p>".
+                                       "<p style="."display:inline-block;"."><a href="."map.php?id=".$row["order_number"]."><img src="."images/icons/pin.webp"." style="."margin-left:30px;width:40px;"."></a></p>".
                                        "<a href=".$row["has_details_path"]." class=".$row["a_active"]." style="."display:".$row["display_details"].">Više detalja</a>".
                                       "<p id=".$row["krizan_project_list_id"]." style="."display:none"."><b>".$row["list_of_krizan_products"]."</b></p>".
                                 "</div>". 

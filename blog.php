@@ -72,7 +72,7 @@
                       ?>
                     </ul>
                   </li>-->
-                  <li><a href="map.php">Mapa</a></li>
+                  <li><a href="map.php?id=0">Mapa</a></li>
                   <li><a href="about.php">Projekt Križan proizvodi</a></li>
                   <li class="active"><a href="blog.php" >O nama</a></li>
                   <li><a href="contact.php">Kontakt</a></li>
