@@ -88,11 +88,11 @@
 			$(this).toggleClass('active');
 			$('.header-area .nav').slideToggle(200);
 
-			if(splitValue > 200){
+			if(splitValue > 120){
                 $("#mainMap").css('top','3.9rem');
 			}
 			else{
-				$("#mainMap").css('top','15rem');
+				$("#mainMap").css('top','12rem');
 			}
 		});
 	}

@@ -739,6 +739,7 @@ Header Style
     background: #fff;
     padding-left: 0px !important;
     padding-right: 0px !important;
+    margin-top: -10px;
   }
   
 }

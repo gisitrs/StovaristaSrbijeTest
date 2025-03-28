@@ -36,13 +36,18 @@
         <div class="row">
             <div class="col-12" style="height:3.9rem;">
               <nav class="main-nav" style="margin-top:0px;">
+                    
+                    <a onclick="backPage()">
+                       <img src="images/icons/BackButton.png" style="width:30px;margin-top:10px;">
+                    </a>
 
                     <a href="index.php" class="logo">
-                      <img src="images/LOGO-Text.png" alt="" class="mainLogoImage" style="margin-top:10px;">
+                      <img src="images/LOGO-Text.png" alt="" class="mainLogoImage" style="margin-top:10px;margin-left:40px;width:220px;">
                     </a>
 
                     <ul class="nav" style="margin-top:0px;">
-                      <li> <select id="categorySelectId" name="propertyCategories" class="form-select" onchange="categoryChanged()" style="margin-left: 35px; margin-top: 10px; width:250px;"> <!--margin-left: -300px;-->
+                      <li style="border-top:none;"> 
+                            <select id="categorySelectId" name="propertyCategories" class="form-select" onchange="categoryChanged()" style="margin-top: 10px; width:300px; margin-left:-10px;">
                               <option value="0">Sve kategorije</option>
                                   <?php 
                                       require_once "database.php";
@@ -58,7 +63,8 @@
                                   ?>
                             </select>
                       </li>
-                      <li> <select id="citySelectId" name="propertyCities" class="form-select" onchange="cityChanged()" style="margin-left: 35px; margin-top: 10px; width:250px;">
+                      <li style="border-top:none;"> 
+                           <select id="citySelectId" name="propertyCities" class="form-select" onchange="cityChanged()" style="margin-top: 10px; width:300px; margin-left:-10px;">
                                <option value="0">Svi gradovi</option>
                                    <?php 
                                        require_once "database.php";
@@ -74,7 +80,7 @@
                                     ?>
                            </select>
                       </li>
-                      <li><a style="margin-top:10px;" href="index.php">Naslovna strana</a></li>
+                      <!--<li><a onclick="backPage()"><img src="images/icons/BackButton.png" style="width:50px;"></a></li>-->
                       <li><a href="contact.html" style="display:none"></a></li>
                     </ul>   
                     <a class='menu-trigger' style="margin-top: -10px;">
@@ -86,55 +92,6 @@
         </div>
     </div>
   </header>
-
-  <!--<div class="col-lg-12" style="position: absolute; left: 0; top: 0rem; bottom: 0; right: 0;">
-      <div class="col-lg-3" style="display:inline-block;">
-          <a href="index.php" class="logo">
-              <img src="images/LOGO-Text.png" alt="" class="mainLogoImage" style="margin-top:10px;">
-          </a>
-      </div>
-      <div  class="col-lg-6" style="margin-top:20px; display:inline-block;">
-          <div class="col-lg-3" style="display:inline-block;">
-              <fieldset>
-                  <select id="categorySelectId" name="propertyCategories" class="form-select" onchange="categoryChanged()">
-                      <option value="0">Sve kategorije</option>
-                      <php 
-                          require_once "database.php";
-                          $sql = "SELECT id, name FROM vw_getallcategories";
-                          $result = mysqli_query($conn, $sql);
-                           
-                          while($rows = $result->fetch_assoc()){
-                              $cityName = $rows['name'];
-                              $cityId = $rows['id'];
-
-                              echo "<option value='$cityId'>$cityName</option>";
-                          };
-                      ?>
-                  </select>
-              </fieldset>
-          </div>
-          <div class="col-lg-3" style="display:inline-block;">
-              <fieldset>
-                  <select id="citySelectId" name="propertyCities" class="form-select" onchange="cityChanged()">
-                      <option value="0">Svi gradovi</option>
-                      <php 
-                          require_once "database.php";
-                          $sql = "SELECT id, name FROM vw_getallcitieswithobjects";
-                          $result = mysqli_query($conn, $sql);
-                           
-                          while($rows = $result->fetch_assoc()){
-                              $cityName = $rows['name'];
-                              $cityId = $rows['id'];
-
-                              echo "<option value='$cityId'>$cityName</option>";
-                          };
-                      ?>
-                  </select>
-              </fieldset>
-            </div>
-      </div>
-  </div>-->
-  
   
   <div class="site-wrap">
     <p id="objectvaluesId" style="display:block;"></p>
@@ -164,6 +121,20 @@
     $.post("Components/getcitylocations.php", function(data) {
          $("#citylocationsId").val(data);
     });
+
+    function backPage(){
+      window.history.back();
+    }
+    
+    // Function to open the location in Google Maps
+    function openInGoogleMaps(lat, lon) {
+            // Construct the Google Maps URL
+            var googleMapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+
+            // Open Google Maps in a new window/tab
+            //window.open(googleMapsUrl);
+            window.location.href = googleMapsUrl;
+        }
 
     function categoryChanged(){
       var selectElement = document.getElementById("categorySelectId");
@@ -208,17 +179,29 @@
           const orderNumber = coordinate[5];
           const moreDetails = coordinate[6];
           const categoryName = coordinate[7];
-          var showMoreDetails = 'block';
+          var showMoreDetails = 'visible';
+          var category = ''; 
 
           if (moreDetails == '#'){
-            showMoreDetails = 'none';
+            showMoreDetails = 'hidden';
           }
+
+          if (categoryName == 'Građevinski centri'){
+              category = 'Građ. centri' 
+          }
+          else{
+              category = categoryName;
+          }
+
 
           if (type == 'Sve kategorije' || categoryName == type || id == orderNumber){
               var marker = L.marker([latitude, longitude]).addTo(markersLayer);
-              marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /><h2>'+ name +'</h2>'+ 
-                              '<h4>'+ address +'</h4><a href="' + moreDetails + '" style="display:' + showMoreDetails + '">Više detalja</a>' +
-                              '<h6 style="display:inline-block;">Tip: ' + categoryName + '</h6>' );
+              marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /></br></br><h4>'+ name +'</h4></br>'+ 
+                               '<h6>'+ address +'</h6></br>' +
+                               '<h7 style="display:inline-block;">Tip: ' + category + '</h7>' +
+                              '<button id="navigationButtonId" style="margin-left:10px;" onclick="openInGoogleMaps('+ latitude +','+ longitude +')">Navigacija</button>' +
+                              '<a href="' + moreDetails + '" style="display:inline-block;margin-left:20px;;visibility:' + showMoreDetails + '">Više detalja</a>'
+                             );
 
           }
       });
