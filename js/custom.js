@@ -1,3 +1,9 @@
+var searchCategory = document.getElementById('offer-types');
+searchCategory.addEventListener("change", searchObjects);
+
+var searchCity = document.getElementById('select-city');
+searchCity.addEventListener("change", searchObjects);
+
 
 function searchObjects(){
     var selectedCity = document.getElementById("select-city");

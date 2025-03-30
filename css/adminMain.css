@@ -1428,14 +1428,14 @@ footer.footer-no-gap {
 }
 
 footer {
-  margin-top: 150px;
+  /*margin-top: 150px;*/
   background-color: #1e1e1e;
   min-height: 100px;
 }
 
 footer p {
-  text-align: center;
-  line-height: 100px;
+  /*text-align: center;*/
+  /*line-height: 100px;*/
   color: #fff;
   font-size: 16px;
   font-weight: 400;
@@ -1787,6 +1787,10 @@ body {
   overflow-x: hidden;
 }
 
+#followDivId, #linksDivId, #aboutDivId {
+  margin-top: 40px;
+}
+
 @media (max-width: 767px) {
   .header-area .main-nav .logo h1 {
     line-height: 80px !important;
@@ -1809,6 +1813,10 @@ body {
   }
   .header-area .main-nav .nav li:last-child {
     display: none;
+  }
+
+  #followDivId, #linksDivId, #aboutDivId {
+    margin-top: 0px;
   }
 }
 
@@ -1961,6 +1969,7 @@ body {
   position:fixed;
   opacity:0.5;
   transition: 0.4s;
+  display:none;
 }
 
 #scrollToTopArrowId:hover {

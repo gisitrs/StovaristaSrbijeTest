@@ -7,7 +7,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
+    
+    <link rel="stylesheet" href="css/adminMain.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
@@ -26,6 +27,10 @@
     
   </head>
   <body onload = "searchObjects()">
+
+  <?php 
+        include "Components/scroll-to-top-button.php";
+  ?>
   
   <div class="site-loader"></div>
   
@@ -87,40 +92,40 @@
 
     <div class="slide-one-item home-slider owl-carousel">
 
-      <div class="site-blocks-cover overlay" style="background-image: url(images/Carousel1.jfif);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="site-blocks-cover overlay" style="background-image: url(images/ytong1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-10">
-              <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">Tekst opis</span>
-              <h1 class="mb-2">Naziv stovarišta</h1>
-              <p class="mb-5"><strong class="h2 text-success font-weight-bold">Opis</strong></p>
-              <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">Više detalja</a></p>
+              <!--<span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">Tekst opis</span>-->
+              <h1 class="mb-2">YTONG blokovi (sponzor)</h1>
+              <!--<p class="mb-5"><strong class="h2 text-success font-weight-bold">Opis</strong></p>-->
+              <p><a href="https://www.xella.rs/sr_RS/xella-srbija" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">Više detalja</a></p>
             </div>
           </div>
         </div>
       </div>  
 
-      <div class="site-blocks-cover overlay" style="background-image: url(images/Carousel2.jfif);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="site-blocks-cover overlay" style="background-image: url(images/ytong2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-10">
-              <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">Tekst opis</span>
-              <h1 class="mb-2">Naziv stovarišta</h1>
-              <p class="mb-5"><strong class="h2 text-success font-weight-bold">Opis</strong></p>
-              <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">Više detalja</a></p>
+              <!--<span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">Tekst opis</span>-->
+              <h1 class="mb-2">YTONG blokovi</h1>
+              <!--<p class="mb-5"><strong class="h2 text-success font-weight-bold">Opis</strong></p>-->
+              <p><a href="https://www.xella.rs/sr_RS/ytong" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">Više detalja</a></p>
             </div>
           </div>
         </div>
       </div>  
 
-      <div class="site-blocks-cover overlay" style="background-image: url(images/Carousel3.jfif);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="site-blocks-cover overlay" style="background-image: url(images/ytong3.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-10">
-              <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">Tekst opis</span>
-              <h1 class="mb-2">Naziv stovarišta</h1>
-              <p class="mb-5"><strong class="h2 text-success font-weight-bold">Opis</strong></p>
-              <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">Više detalja</a></p>
+              <!--<span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">Tekst opis</span>-->
+              <h1 class="mb-2">YTONG blokovi</h1>
+              <!--<p class="mb-5"><strong class="h2 text-success font-weight-bold">Opis</strong></p>-->
+              <p><a href="https://www.xella.rs/sr_RS/ytong" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">Više detalja</a></p>
             </div>
           </div>
         </div>
@@ -201,9 +206,9 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-3">
+              <!--<div class="col-md-3">
                   <button type="button" class="btn btn-success text-white btn-block rounded-0"  onclick="searchObjects()">Search</button>
-              </div>
+              </div>-->
             </div>
           </form>
         </div>  
@@ -254,66 +259,59 @@
       </div>
     </div>
 
-        <footer class="site-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="mb-5">
-                  <h3 class="footer-heading mb-4">O Stovarištima Srbije</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
-                </div>
-              </div>
-              <div class="col-lg-4 mb-5 mb-lg-0">
-                <div class="row mb-5">
-                  <div class="col-md-12">
-                    <h3 class="footer-heading mb-4">Brzi linkovi</h3>
-                  </div>
-                  <div class="col-md-6 col-lg-6">
-                    <ul class="list-unstyled">
-                      <li><a href="index.html">Naslovna</a></li>
-                      <li><a href="properties.html">Gradovi</a></li>
-                      <li><a href="buy.html">Proizvodi</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6 col-lg-6">
-                    <ul class="list-unstyled">
-                      <li><a href="about.html">Projekt Križan proizvodi</a></li>
-                      <li><a href="blog.html">O nama</a></li>
-                      <li><a href="contact.html">Kontakt</a></li>
-                    </ul>
-                  </div>
-                </div>
-    
-    
-              </div>
-    
-              <div class="col-lg-4 mb-5 mb-lg-0">
-                <h3 class="footer-heading mb-4">Pratite nas</h3>
-    
-                    <div>
-                      <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                      <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                      <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                      <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-                    </div>
-    
-                
-    
-              </div>
-              
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div id="aboutDivId" class="col-lg-5">
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">O Stovarištima Srbije</h3>
+              <p>"Stovaršta Srbije" je jedinstvena platforma koja povezuje stovarišta širom Srbije, omogućavajući lako pronalaženje i nabavku građevinskog materijala po konkurentnim cenama.</p>
             </div>
-            <!--<div class="row pt-5 mt-5 text-center">
-              <div class="col-md-12">
-                <p>
-                Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                </p>
-              </div>
-              
-            </div>-->
           </div>
-        </footer>
+          <div id="linksDivId" class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Brzi linkovi</h3>
+              </div>
+              <div class="col-md-8 col-lg-8">
+                <ul class="list-unstyled">
+                  <li><a href="index.php">Naslovna</a></li>
+                  <li><a href="about.php">Projekt Križan proizvodi</a></li>
+                  <li><a href="blog.php">O nama</a></li>
+                  <li><a href="contact.php">Kontakt</a></li>
+                  <!--<li><a href="buy.html">Proizvodi</a></li>-->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 mb-3 mb-lg-0">
+            <h3 id="followDivId" class="footer-heading mb-4">Pratite nas</h3>
+                <div>
+                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   </div>
+
+  <div style="padding-bottom: 15px; padding-top: 15px; background-color: #FFFFFF;">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-12 text-center" style="font-size:11px;">
+                   <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                   <b>Created By</b> <a href="https://www.gisit.rs">
+                   <img src="images/icons/Gisit_transparent.png" alt="" style="max-width:100px;">
+                   </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -328,7 +326,7 @@
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/aos.js"></script>
   <script src="js/custom.js"></script>
-
+  <script src="js/scrollToTop.js"></script>
 
   <script src="js/main.js"></script>
     
