@@ -273,6 +273,9 @@ if (!isset($_SESSION["user"])) {
   </div> 
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  
+  <!-- Leaflet Control Geocoder JavaScript -->
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
   <script>
     // Initialize the map
@@ -288,10 +291,7 @@ if (!isset($_SESSION["user"])) {
 
     // Optional: Bind a popup to the marker
     //marker.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
-
-    // Create a LayerGroup to store markers
-    var markersLayer = L.layerGroup().addTo(map);
-
+    
     // Event listener for map click to get Latitude and Longitude
     map.on('click', function(event) {
       var lat = event.latlng.lat;
@@ -304,6 +304,48 @@ if (!isset($_SESSION["user"])) {
 
       var marker = L.marker([lat, lng]).addTo(markersLayer);
     });
+    
+    // Create a LayerGroup to store markers
+    var markersLayer = L.layerGroup().addTo(map);
+    
+    // Initialize the geocoder control
+    var geocoder = L.Control.geocoder({
+      geocoder: new L.Control.Geocoder.Nominatim(), // Use Nominatim geocoding service
+      placeholder: "Search for a place...", // Search box placeholder text
+      defaultMarkGeocode: false, // Disable automatic result markers and list display
+      collapsed: false // Make sure the search control is always visible
+    }).addTo(map);
+
+    // Override the default behavior to avoid showing results
+    geocoder.on('markgeocode', function(e) {
+      var latlng = e.geocode.center;
+      map.setView(latlng, 13); // Zoom to the result location
+    });
+
+    // Disable displaying results completely by modifying the geocoder's behavior
+    geocoder._geocoder.on('start', function() {
+      // Remove any results markers, if they exist
+      geocoder._map.eachLayer(function(layer) {
+        if (layer instanceof L.Marker) {
+          geocoder._map.removeLayer(layer);
+        }
+      });
+    });
+
+    // Optionally, disable the results dropdown entirely (no popup or list)
+    geocoder._input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        // This ensures only zooming occurs, without showing results
+        geocoder._geocoder.geocode(geocoder._input.value, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            map.setView(latlng, 13); // Zoom into the location without showing any results
+          }
+        });
+        event.preventDefault(); // Prevent the default result behavior
+      }
+    });
+    
   </script>
 
   <!-- Scripts -->
