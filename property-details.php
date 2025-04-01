@@ -311,7 +311,7 @@
                       {
                           while ($row = $result-> fetch_assoc())
                           {
-                              echo $row["description"];
+                              echo $row["small_description"];
                           }
                       }
                       else {
@@ -350,7 +350,7 @@
                 {
                    while ($row = $result-> fetch_assoc())
                    {
-                       echo "<div id=".$row["div_id"]." class="."col-lg-4"." data-position=".$row["name"].">".
+                       echo "<div id=".$row["div_id"]."c"." class="."col-lg-4"." data-position=".$row["name"].">".
                                 "<div class="."property-entry".">".
                                     "<a href=".$row["has_details_path"]." class=".$row["a_active"]." >".
                                         "<img src=".$row["image_path"]." alt="."Image"." class="."img-fluid"." style="."width:100%; height:50%".">".

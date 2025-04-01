@@ -165,8 +165,8 @@
 
       // Step 2: Reformat the parsed data into an array of arrays (latitude, longitude)
       const coordinates = [];
-      for (let i = 0; i < coordinateString.length; i += 8) {
-         coordinates.push([coordinateString[i], coordinateString[i + 1], coordinateString[i + 2], coordinateString[i + 3], coordinateString[i + 4], coordinateString[i + 5], coordinateString[i + 6], coordinateString[i + 7]]);
+      for (let i = 0; i < coordinateString.length; i += 9) {
+         coordinates.push([coordinateString[i], coordinateString[i + 1], coordinateString[i + 2], coordinateString[i + 3], coordinateString[i + 4], coordinateString[i + 5], coordinateString[i + 6], coordinateString[i + 7], coordinateString[i + 8]]);
       }
 
       // Step 3: Use forEach to loop through the coordinates array
@@ -179,6 +179,7 @@
           const orderNumber = coordinate[5];
           const moreDetails = coordinate[6];
           const categoryName = coordinate[7];
+          const cityName = coordinate[8];
           var showMoreDetails = 'visible';
           var category = ''; 
 
@@ -197,7 +198,7 @@
           if (type == 'Sve kategorije' || categoryName == type || id == orderNumber){
               var marker = L.marker([latitude, longitude]).addTo(markersLayer);
               marker.bindPopup('<img src="'+ imagePath +'" alt="Image" style="width:300px;" /></br></br><h4>'+ name +'</h4></br>'+ 
-                               '<h6>'+ address +'</h6></br>' +
+                               '<h6>'+ address +', ' + cityName + '</h6></br>' +
                                '<h7 style="display:inline-block;">Tip: ' + category + '</h7>' +
                               '<button id="navigationButtonId" style="margin-left:10px;" onclick="openInGoogleMaps('+ latitude +','+ longitude +')">Navigacija</button>' +
                               '<a href="' + moreDetails + '" style="display:inline-block;margin-left:20px;;visibility:' + showMoreDetails + '">Više detalja</a>'

@@ -26,7 +26,7 @@ function searchObjects(){
     
     if(selectedCityValue != 0)
     {
-        filterByCity = filterByCity + selectedCityValue;
+        filterByCity = filterByCity + selectedCityValue + 'c';
     } 
 
     $('*[id*='+ filterByCity + ']:hidden').each(function(index, value) {
