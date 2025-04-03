@@ -440,15 +440,15 @@ if (!isset($_SESSION["user"])) {
  $(document).on("click", "#filterDataTableId", function(){
    //var selectedType = $("#typeSelectId option:selected").text();
    var typeId = $("#typeSelectId").val();
-   var selectedType = "_" + typeId + "_";
+   var selectedType = typeId + "c";
 
    if (typeId == 0){
-       $('*tr[id*=_]:hidden').each(function(index, value) {
+       $('*tr[id*=cityid]:hidden').each(function(index, value) {
 	       $("#"+ value.id + "").show();
 	   });
    }
    else {
-    $('*tr[id*=_]:visible').each(function(index, value) {
+    $('*tr[id*=cityid]:visible').each(function(index, value) {
 		$("#"+ value.id + "").hide();
 	});
 
@@ -689,32 +689,33 @@ if (!isset($_SESSION["user"])) {
  <!--<div  style="position:absolute; top: 0; right:0;">
         <a href="logout.php" class="btn btn-warning" >Logout</a>
     </div>-->
-    <!--<div class="container col-lg-12">
+
+    <div class="container col-lg-12">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="text-center">
-                    <h3>Detalji o nekretninama</h3>
+                    <h3>Detalji o stovarištima</h3>
                 </div>
                 <div style="height: 50px;"></div>
                 <div class="row">
-                    <div class="col-sm-4">-->
+                    <div class="col-sm-4">
                         <!--<button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i>Dodaj novu</button>-->
-                    <!--</div>
+                    </div>
                 </div>
                 <div class="row col-lg-12">
                     <div class="col-lg-3">
                         <fieldset>
                             <select id="typeSelectId" name="testDT" class="form-select" style="margin-bottom:10px;">
-                                <php 
-                                    require_once "database.php";
-                                    $sql = "SELECT id, type_name FROM vw_getallpropertytypes ORDER BY id";
+                                <?php 
+                                    require_once "../database.php";
+                                    $sql = "SELECT order_id, name FROM vw_getallcitieswithobjects ORDER BY id";
                                     $result = mysqli_query($conn, $sql);
                           
                                     while($rows = $result->fetch_assoc()){
-                                        $typeName = $rows['type_name'];
-                                        $typeId = $rows['id'];
+                                        $cityName = $rows['name'];
+                                        $cityId = $rows['order_id'];
 
-                                        echo "<option value='$typeId'>$typeName</option>";
+                                        echo "<option value='$cityId'>$cityName</option>";
                                     };
                                 ?>    
                             </select>
@@ -732,22 +733,22 @@ if (!isset($_SESSION["user"])) {
                 <thead>
                     <tr style="width:90%;">
                         <th style="width:5%;">ID</th>
-                        <th style="width:40%;">Informacije o nepokretnosti</th>
-                        <th style="width:40%;">Opis / Beleška</th>
+                        <th style="width:40%;">Informacije o stovarištu</th>
+                        <th style="width:40%;">Opis</th>
                         <th style="width:15%;">Akcije</th>
                     </tr>
                 </thead>
                 <tbody>
-               <php 
+               <?php 
                   //include"dbcon.php"; 
-                  require_once "database.php";
-                  $query_pag_data = "SELECT * FROM vw_getallrepinformationsforedit ORDER BY ref DESC";
+                  require_once "../database.php";
+                  $query_pag_data = "SELECT * FROM vw_getallobjects ORDER BY order_number DESC";
                   $result_pag_data = mysqli_query($conn, $query_pag_data);
                   while($row = mysqli_fetch_assoc($result_pag_data)) {
-                      $property_id=$row['id']; 
-                      $property_ref=$row['ref']; 
-                      $property_name=$row['pro_name'];
-                      $property_price=$row['price']; 
+                      $property_id=$row['order_number']; 
+                      $div_id=$row['div_id']; 
+                      $property_name=$row['name'];
+                      /*$property_price=$row['price']; 
                       $property_address=$row['address']; 
                       $smalldesc=$row['pro_small_desc']; 
                       $metadesc=$row['metadesc']; 
@@ -755,17 +756,17 @@ if (!isset($_SESSION["user"])) {
                       $proType=$row['pro_type'];
                       $squareFeet=$row['square_feet'];
                       $landArea=$row['land_area'];
-                      $isFeatured=$row['isFeatured'];
+                      $isFeatured=$row['isFeatured'];*/
                 ?>
-                    <tr <php echo "id=".$property_id."_".$proType."_" ?> style="width:90%;">
+                    <tr <?php echo "id=".$div_id."c" ?> style="width:90%;">
                         <td id="tdId1" data-cell="ID">
-                           <p style="display: inline-block;" <php echo "id=".$property_id."_pId" ?>><php echo $property_id; ?></p>
+                           <p style="display: inline-block;" <?php echo "id=".$property_id."_pId" ?>><?php echo $property_id; ?></p>
                         </td>
                         <td id="tdId2" data-cell="Informacije o nepokretnosti">
                             <div id="PropertyNameHeaderId">
-                                <h4 <php echo "id=".$property_id."_pName" ?>><php echo $property_name; ?></h4>
+                                <h4 <?php echo "id=".$property_id."_pName" ?>><?php echo $property_name; ?></h4>
                             </div>
-                            <div>
+                            <!--<div>
                                 <div>
                                     <p style="display: inline-block; margin-top:10px;"><b>Istaknuto:</b></p>
                                     <input <php echo "id=".$property_id."_pIsFeatured" ?> type="checkbox" style="display: inline-block; margin-top:10px; margin-left:10px;" <php echo "value=".$isFeatured."" ?> disabled <php echo ($isFeatured == 1 ? 'checked' : '');?>></input>
@@ -794,20 +795,20 @@ if (!isset($_SESSION["user"])) {
                                     <p style="display: inline-block;"><b>Tip:</b></p>
                                     <p <php echo "id=".$property_id."_pType" ?> style="display: inline-block;"><php echo $typeName; ?></p>
                                 </div>
-                            </div>
+                            </div>-->
                         </td>
                         <td id="tdId3" data-cell="Opis / Beleška">
-                            <div Id="DivDescriptionId">
+                            <!--<div Id="DivDescriptionId">
                                 <p><b>Opis:</b></p>
                                 <p <php echo "id=".$property_id."_pSmalldesc" ?> style="display: inline-block;"><php echo $smalldesc; ?></p>
                             </div>
                             <div>
                                 <p style="margin-top:10px; "><b>Beleška agent:</b></p>
                                 <p <php echo "id=".$property_id."_pMetadesc" ?> ><php echo $metadesc; ?></p>
-                            </div>
+                            </div>-->
                         </td>
                         <td id="tdId4" data-cell="Akcije">
-                            <div class="parent">
+                            <!--<div class="parent">
                                 <div class="child">
                                     <div class="add" title="Sačuvaj izmene" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-check"></i></div>
                                 </div>
@@ -816,20 +817,20 @@ if (!isset($_SESSION["user"])) {
                                 <div class="delete child" title="Ukloni oglas" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
                                 <div class="deleteimages child" title="Brisanje fotografija" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/remove-image.svg" style="width:30px;"></img></div>
                                 <div class="archive child" title="Arhiviraj oglas" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/archive.png" style="width:30px;"></img></div>
-                            </div> -->
-                            <!--<div class="edit" title="Edit" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
+                            </div>
+                            <div class="edit" title="Edit" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
                             <div class="delete" title="Delete" data-toggle="tooltip" id="<php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
                             <div class="deleteimages" title="Delete Image" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/remove-image.svg" style="width:30px;"></img></div>
                             <div class="archive" title="Arhiviraj nepokretnost" data-toggle="tooltip" id="<php echo $property_id; ?>"><img src="../assets/images/2019/archive.png" style="width:30px;"></img></div>-->
-                        <!--</td>
+                        </td>
                     </tr>   
-          <php } ?>     
+          <?php } ?>     
                 </tbody>
             </table>
         </div>
     </div>
 
-    <p id="clickedImagesListId" style="display: none"></p>
+    <!--<p id="clickedImagesListId" style="display: none"></p>
 
     <div class="modal fade" id="deleteusermodal" tabindex="-1" aria-labelledby="deleteusermodalLabel" aria-hidden="true">
         <div class="modal-dialog">
