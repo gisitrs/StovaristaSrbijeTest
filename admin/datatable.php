@@ -268,7 +268,7 @@ if (!isset($_SESSION["user"])) {
 
         $('#deleteusermodal').modal('hide');
         $.post("ajax_delete.php", { string: string }, function(data) {
-           //$("#displaymessage").html(data);
+           $("#displaymessage").html(data);
         });
         $('#'+ id +'').parents("tr").remove();
     }); 
@@ -736,7 +736,7 @@ if (!isset($_SESSION["user"])) {
                        </fieldset>
                    </div>
                    <div class="col-lg-1">
-                      <p id="displaymessage" style="display: none;"></p>
+                      <p id="displaymessage" style="display: block;"></p>
                       <fieldset >
                           <button id="filterDataTableId" type="submit" name="filterProperties" class="btn btn-primary btn-block" style="background-color: #36389b; border: none; width:120px;">Filtriraj</button>
                       </fieldset>

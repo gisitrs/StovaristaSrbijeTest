@@ -255,7 +255,7 @@ if (!isset($_SESSION["user"])) {
                             <select name="property" class="form-select">
                               <?php 
                                   require_once "../database.php";
-                                  $sql = "SELECT id, name, order_number FROM object WHERE has_details = 1 ORDER BY order_number DESC";
+                                  $sql = "SELECT id, name, order_number FROM object ORDER BY order_number DESC";
                                   $result = mysqli_query($conn, $sql);
                            
                                    while($rows = $result->fetch_assoc()){
