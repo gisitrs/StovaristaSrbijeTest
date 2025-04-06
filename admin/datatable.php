@@ -20,9 +20,10 @@ if (!isset($_SESSION["user"])) {
     <title>Projekt Križan D.O.O.</title>
 
     <!-- Bootstrap core CSS -->
+    <link href="../css/adminMain.css" rel="stylesheet">
     <link href="../css/bootstrapAdmin.min.css" rel="stylesheet"> 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/adminMain.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
@@ -287,17 +288,25 @@ if (!isset($_SESSION["user"])) {
 
     $(document).on("click", "#xCloseDeleteImagesButtonId", function(){
         $('#deleteimagesusermodal').modal('hide');
-    });
+    });  
+
+    $(document).on("click", "#closeUpdateLocationDataId", function(){
+        $('#updatelocationusermodal').modal('hide');
+    }); 
+
+    $(document).on("click", "#xCloseUpdateLocationButtonId", function(){
+        $('#updatelocationusermodal').modal('hide');
+    }); 
     
     $(document).on("click", ".archive", function(e){
       var id = $(this).attr("id");
       $('#user_id').val(id);
       
-      $.post("getmetadesc.php", { propId: id}, function(data) {
+      /*$.post("getmetadesc.php", { propId: id}, function(data) {
          $("#archivetxtmetadesc").val(data);
-      });
+      });*/
 
-      $('#archiveusermodal').modal('show');
+      $('#updatelocationusermodal').modal('show');
     });
 
     $(document).on("click", "#finalArchiveId", function(){
@@ -933,9 +942,111 @@ if (!isset($_SESSION["user"])) {
         </div>
     </div>
 
+    <div class="modal fade" id="updatelocationusermodal" tabindex="-1" aria-labelledby="deleteusermodalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteusermodalLabel">Brisanje stovarišta</h1>
+                    <button id="xCloseUpdateLocationButtonId" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="post">
+                    <div>
+                        <input type="text" name="user_id" id="user_id" style="display: block;">
+                    </div>
+                    <div>
+                        <div id="map"></div>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Da li ste sigurni da želite da ažurirate lokaciju?</h4>
+                    </div>    
+                    <div class="modal-footer">
+                        <button id="closeUpdateLocationDataId" type="button" name="close_delete_data" class="btn btn-secondary" data-bs-dismiss="modal">Ne</button>
+                        <button id="finalUpdateLocationDataId" type="button" name="delete_data" class="btn btn-danger">Ažuriraj</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  
+  <!-- Leaflet Control Geocoder JavaScript -->
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([44.808567, 20.467469], 8); // Coordinates for London, change to your desired location
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a marker at the given coordinates
+    //var marker = L.marker([51.505, -0.09]).addTo(map); // Coordinates for London
+
+    // Optional: Bind a popup to the marker
+    //marker.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
+    
+    // Event listener for map click to get Latitude and Longitude
+    map.on('click', function(event) {
+      var lat = event.latlng.lat;
+      var lng = event.latlng.lng;
+      // Display the coordinates
+      document.getElementById('latId').value = lat.toFixed(6);
+      document.getElementById('lonId').value = lng.toFixed(6);
+      
+      markersLayer.clearLayers();
+
+      var marker = L.marker([lat, lng]).addTo(markersLayer);
+    });
+    
+    // Create a LayerGroup to store markers
+    var markersLayer = L.layerGroup().addTo(map);
+    
+    // Initialize the geocoder control
+    /*var geocoder = L.Control.geocoder({
+      geocoder: new L.Control.Geocoder.Nominatim(), // Use Nominatim geocoding service
+      placeholder: "Search for a place...", // Search box placeholder text
+      defaultMarkGeocode: false, // Disable automatic result markers and list display
+      collapsed: false // Make sure the search control is always visible
+    }).addTo(map);
+
+    // Override the default behavior to avoid showing results
+    geocoder.on('markgeocode', function(e) {
+      var latlng = e.geocode.center;
+      map.setView(latlng, 13); // Zoom to the result location
+    });
+
+    // Disable displaying results completely by modifying the geocoder's behavior
+    geocoder._geocoder.on('start', function() {
+      // Remove any results markers, if they exist
+      geocoder._map.eachLayer(function(layer) {
+        if (layer instanceof L.Marker) {
+          geocoder._map.removeLayer(layer);
+        }
+      });
+    });
+
+    // Optionally, disable the results dropdown entirely (no popup or list)
+    geocoder._input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        // This ensures only zooming occurs, without showing results
+        geocoder._geocoder.geocode(geocoder._input.value, function(results) {
+          if (results && results.length > 0) {
+            var latlng = results[0].center;
+            map.setView(latlng, 13); // Zoom into the location without showing any results
+          }
+        });
+        event.preventDefault(); // Prevent the default result behavior
+      }
+    });  */
+  </script>
+
   <script src="../jquery/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/isotope.min.js"></script>
