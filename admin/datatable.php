@@ -280,6 +280,14 @@ if (!isset($_SESSION["user"])) {
     $(document).on("click", "#xCloseDeleteButtonId", function(){
         $('#deleteusermodal').modal('hide');
     });
+
+    $(document).on("click", "#closeDeleteImagesId", function(){
+        $('#deleteimagesusermodal').modal('hide');
+    }); 
+
+    $(document).on("click", "#xCloseDeleteImagesButtonId", function(){
+        $('#deleteimagesusermodal').modal('hide');
+    });
     
     $(document).on("click", ".archive", function(e){
       var id = $(this).attr("id");
@@ -832,8 +840,8 @@ if (!isset($_SESSION["user"])) {
                                     <div class="add" title="Sačuvaj izmene" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-check"></i></div>
                                 </div>
                                 <div class="close child" title="Napusti izmene" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-close"></i></div>
-                                <div class="edit child" title="Izmeni oglas" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
-                                <div class="delete child" title="Ukloni oglas" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
+                                <div class="edit child" title="Izmeni stovarište" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-pencil"></i></div>
+                                <div class="delete child" title="Ukloni stovarište" data-toggle="tooltip" id="<?php echo $property_id; ?>"><i class="fa fa-trash-o"></i></div>
                                 <div class="deleteimages child" title="Brisanje fotografija" data-toggle="tooltip" id="<?php echo $property_id; ?>"><img src="../images/icons/remove-image.svg" style="width:30px;"></img></div>
                                 <div class="archive child" title="Arhiviraj oglas" data-toggle="tooltip" id="<?php echo $property_id; ?>"><img src="../images/icons/pin.webp" style="width:30px;"></img></div>
                             </div>
@@ -900,14 +908,14 @@ if (!isset($_SESSION["user"])) {
                 </form>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="modal fade" id="deleteimagesusermodal" tabindex="-1" aria-labelledby="deleteimagesusermodalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="deleteusermodalLabel">Brisanje fotografija</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="xCloseDeleteImagesButtonId" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form name="form" action="" method="post">
                     <input type="text" name="testname" id="deleteimagespropid" style="display: none;">
@@ -923,7 +931,7 @@ if (!isset($_SESSION["user"])) {
                 </form>
             </div>
         </div>
-    </div>-->
+    </div>
 
 
   <!-- Scripts -->
