@@ -176,7 +176,8 @@
                       {
                           while ($row = $result-> fetch_assoc())
                           {
-                              echo $row["name"];
+                              echo $row["name"]."<br>".
+                                   "<p style="."color:black;".">".$row["address"].", ".$row["city_name"]."</p>";
                           }
                       }
                       else {
@@ -190,18 +191,18 @@
                 <div class="col-md-6">
                   <ul class="property-specs-wrap mb-3 mb-lg-0  float-lg-right">
                   <li>
-                    <span class="property-specs">Detalj1</span>
-                    <span class="property-specs-number">2 <sup>+</sup></span>
+                    <span class="property-specs">Broj lokacija</span>
+                    <span class="property-specs-number">13</span>
                     
                   </li>
                   <li>
-                    <span class="property-specs">Detalj2</span>
-                    <span class="property-specs-number">2</span>
+                    <span class="property-specs">Radno vreme</span>
+                    <span class="property-specs-number">7-15h, Subotom 7-15h</span>
                     
                   </li>
                   <li>
-                    <span class="property-specs">Detalj3</span>
-                    <span class="property-specs-number">7,000</span>
+                    <span class="property-specs">Broj zaposlenih</span>
+                    <span class="property-specs-number">70</span>
                     
                   </li>
                 </ul>
@@ -214,14 +215,28 @@
                 </div>
                 <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                   <span class="d-inline-block text-black mb-0 caption-text">Datum osnivanja</span>
-                  <strong class="d-block">2018</strong>
+                  <strong class="d-block">1991</strong>
                 </div>
                 <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
-                  <span class="d-inline-block text-black mb-0 caption-text">Price/Sqft</span>
-                  <strong class="d-block">$520</strong>
+                  <span class="d-inline-block text-black mb-0 caption-text">Broj proizvoda</span>
+                  <strong class="d-block">+12,000</strong>
+                </div>
+                <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
+                <a href="https://dzavic.com/index.php" class="btn btn-primary btn-sm rounded-0" style="display:inline-block;">www.stovariste-sajt.com</a>
                 </div>
               </div>
+              
               <h2 class="h4 text-black">Više detalja</h2>
+              </br><p>Građevinski centar je mesto gde možete pronaći sve što vam je potrebno za izgradnju, adaptaciju i uređenje vašeg doma ili poslovnog prostora. U ponudi se nalazi širok asortiman građevinskog materijala, alata, elektro i vodovodne opreme, kao i proizvoda za završne radove – keramika, boje, fasade i još mnogo toga.</p>
+              <p>Pored bogate ponude proizvoda, građevinski centar pruža i niz usluga kao što su stručni saveti, dostava robe na adresu, sečenje i obrada materijala, kao i preporuka pouzdanih majstora i izvođača radova.</p>
+              <p>Bez obzira da li ste profesionalac u građevini ili renovirate svoj prostor, u našem centru ćete pronaći sve što vam je potrebno – brzo, pouzdano i na jednom mestu.</p>
+              </br>
+              <div style="display:inline-block;">
+                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+              </div>
               <?php
                       include "database.php";
                           
@@ -233,7 +248,7 @@
                       {
                           while ($row = $result-> fetch_assoc())
                           {
-                              echo "<p>".$row["large_description"]."</p>".
+                              echo "<p style="."display:inline-block;".">".$row["large_description"]."</p>".
                                    "<p style="."display:inline-block;"."><a href="."map.php?id=".$row["order_number"]."><img src="."images/icons/pin.webp"." style="."margin-left:30px;width:40px;"."></a></p>";
                           }
                       }
@@ -275,7 +290,7 @@
           </div>
           <div class="col-lg-4">
 
-            <div class="bg-white widget border rounded">
+            <!--<div class="bg-white widget border rounded">
 
               <h3 class="h4 text-black widget-title mb-3">Pošaljite nam poruku</h3>
               <form action="" class="form-contact-agent">
@@ -295,7 +310,7 @@
                   <input type="submit" id="phone" class="btn btn-primary" value="Pošalji">
                 </div>
               </form>
-            </div>
+            </div>-->
 
             <div class="bg-white widget border rounded">
               <h3 class="h4 text-black widget-title mb-3">Opis</h3>
@@ -376,7 +391,7 @@
                                        "<p id=".$row["project_list_id"]." style="."display:inline-block;"."><b>Tip: </b>".$row["category_name"]."</p>".
                                        "<p style="."display:inline-block;"."><a href="."map.php?id=".$row["order_number"]."><img src="."images/icons/pin.webp"." style="."margin-left:30px;width:40px;"."></a></p>".
                                        "<a href=".$row["has_details_path"]." class=".$row["a_active"]." style="."display:".$row["display_details"].">Više detalja</a>".
-                                      "<p id=".$row["krizan_project_list_id"]." style="."display:none"."><b>".$row["list_of_krizan_products"]."</b></p>".
+                                       "<p id=".$row["krizan_project_list_id"]." style="."display:none"."><b>".$row["list_of_krizan_products"]."</b></p>".
                                 "</div>". 
                             "</div>".
                         "</div>";
